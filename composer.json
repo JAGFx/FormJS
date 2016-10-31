@@ -1,6 +1,7 @@
 {
 	"name":    "jagfx/form-js",
 	"description": "Envoie de formulaire en AJAX avec feedback utilisateur",
+	"minimum-stability" : "dev",
 	"type":    "project",
 	"require": {
 		"jquery/jquery": "3.1.*"
