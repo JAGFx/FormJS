@@ -1,0 +1,84 @@
+/**
+	 * Created by PhpStorm.
+	 * @author: SMITH Emmanuel
+ */
+
+/* ------------------------------------------- Alert - Tout type */
+@media (min-width: 768px) {
+	.messageForm .alert > .ico { max-width: 65px; min-width: 65px; }
+}
+
+
+.messageForm .alert { font-family: 'Nunito', sans-serif; display: none; padding: 0; }
+
+
+.messageForm .alert > .ico {
+	width:      100%;
+	text-align: center;
+	padding:    20px 15px;
+}
+
+
+.messageForm .alert > .ico > .glyphicon, .messageForm .alert > .ico > .fa { font-size: 2.5em; color: rgba(0, 0, 0, .3); }
+
+
+.messageForm .alert > .info { width: 100%; }
+
+
+.messageForm .alert > .info > h4 {
+	text-transform: uppercase;
+	font-family:    'Quicksand', sans-serif;
+	padding:        20px 15px 0 15px;
+	font-size:      150%;
+}
+
+
+.messageForm .alert > .info > p {
+	font-style: italic;
+	padding:    0 15px 15px 15px;
+	margin:     0;
+	color:      #485563;
+}
+
+
+/* ------------------------------------------- Alert - Succes */
+.messageForm .alert.alert-cust-success > .ico { background: #5CB85C; }
+
+
+.messageForm .alert.alert-cust-success > .info { background: rgba(92, 184, 92, .2); }
+
+
+.messageForm .alert.alert-cust-success > .info > h4 { color: #5CB85C; }
+
+
+/* ------------------------------------------- Alert - Info */
+.messageForm .alert.alert-cust-info > .ico { background: #3498DB; }
+
+
+.messageForm .alert.alert-cust-info > .info { background: rgba(52, 152, 219, .2); }
+
+
+.messageForm .alert.alert-cust-info > .info > h4 { color: #3498DB; }
+
+
+/* ------------------------------------------- Alert - Warning */
+.messageForm .alert.alert-cust-warning > .ico { background: #F0AD4E; }
+
+
+.messageForm .alert.alert-cust-warning > .info { background: rgba(240, 173, 78, .2); }
+
+
+.messageForm .alert.alert-cust-warning > .info > h4 { color: #F0AD4E; }
+
+
+/* ------------------------------------------- Alert - Danger / Error */
+.messageForm .alert.alert-cust-danger > .ico,
+.messageForm .alert.alert-cust-error > .ico { background: #D9534F; }
+
+
+.messageForm .alert.alert-cust-danger > .info,
+.messageForm .alert.alert-cust-error > .info { background: rgba(217, 83, 79, .2); }
+
+
+.messageForm .alert.alert-cust-danger > .info > h4,
+.messageForm .alert.alert-cust-error > .info > h4 { color: #D9534F; }

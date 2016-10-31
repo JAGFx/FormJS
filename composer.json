@@ -1,0 +1,15 @@
+{
+	"name":    "jagfx/form-js",
+	"description": "Envoie de formulaire en AJAX avec feedback utilisateur",
+	"type":    "project",
+	"require": {
+		"jquery/jquery": "3.1.*"
+	},
+	"license": "MIT",
+	"authors": [
+		{
+			"name":  "JAGFx",
+			"email": "contact@jagfx.fr"
+		}
+	]
+}
