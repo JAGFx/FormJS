@@ -5,6 +5,9 @@
 	"require": {
 		"jquery/jquery": "3.1.*"
 	},
+	"require-dev": {
+		"jquery/jquery": "3.1.*"
+	},
 	"license": "MIT",
 	"authors": [
 		{
