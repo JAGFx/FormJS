@@ -3,10 +3,7 @@
 	"description": "Envoie de formulaire en AJAX avec feedback utilisateur",
 	"minimum-stability" : "dev",
 	"require": {
-		"jquery/jquery": "3.1.*"
-	},
-	"require-dev": {
-		"jquery/jquery": "3.1.*"
+		"components/jquery": "3.1.*"
 	},
 	"license": "MIT",
 	"authors": [
