@@ -1,3 +1,20 @@
+# FormJS
+[![Latest Stable Version](https://poser.pugx.org/jagfx/form-js/v/stable)](https://packagist.org/packages/jagfx/form-js)
+[![Total Downloads](https://poser.pugx.org/jagfx/form-js/downloads)](https://packagist.org/packages/jagfx/form-js)
+[![Latest Unstable Version](https://poser.pugx.org/jagfx/form-js/v/unstable)](https://packagist.org/packages/jagfx/form-js)
+[![License](https://poser.pugx.org/jagfx/form-js/license)](https://packagist.org/packages/jagfx/form-js?format=flat)
+
+## Instalation
+#### Bower
+````
+bower install jagfx-form-js
+````
+
+#### Composer
+````
+composer require jagfx/form-js:dev-master
+````
+
 ## Guide d'utilisation Form  
 Dans tous les cas, la page de traitement appelé sera celle de **`action`**. Il peut être **`NULL`**
 
