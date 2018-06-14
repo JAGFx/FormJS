@@ -9,7 +9,7 @@
 }
 
 
-.messageForm .alert { font-family: 'Nunito', sans-serif; display: none; padding: 0; }
+.messageForm .alert { display: none; padding: 0; }
 
 
 .messageForm .alert > .ico {

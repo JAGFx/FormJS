@@ -1,89 +1,248 @@
 /**
  * Created by PhpStorm.
  * @author: SMITH Emmanuel
+ * @version 2.0.0
  */
-
-
-/**
- *
- * @param $form
- * @param alertData
- * @param btnSender
- * @param callback
- */
-function writeAlert( $form, alertData, btnSender, callback ) {
-	var containerAlert = $form
-		.find( ".messageForm" )
-		.empty()
-		.html( "<div class=\"alert alert-cust-" + alertData.type + "\" role=\"alert\"></div>" );
-
-	var domAlert = containerAlert.find( "div.alert-cust-" + alertData.type );
-
-	//console.log(containerAlert.position());
-	if ( domAlert.length ) {
-		domAlert
-			.html( "<div class=\"ico\">\n\
-						<span class=\"" + toGlyph( alertData.type ) + "\"></span>\n\
-					</div>\n\
-					<div class=\"info\">\n\
-						<h4>" + alertData.titre + "</h4>\n\
-						<p>" + alertData.msg + "</p>\n\
-					</div>" )
-			.setDisplayForm()
-			.hide()
-			.fadeIn( 300 );
-
-		$( 'html, body' ).animate( {
-			scrollTop: containerAlert.offset().top - 55
-		}, 300 );
-	}
-
-	else if ( alertData.type === "danger" || alertData.type === "error" )
-		console.error( alertData.titre + " - " + alertData.msg );
-
-	else if ( alertData.type === "warning" )
-		console.warn( alertData.titre + " - " + alertData.msg );
-
-	else
-		console.log( alertData.titre + " - " + alertData.msg );
-
-	if ( btnSender !== undefined && btnSender.length ) {
-		//console.log(btnSender);
-		btnSender
-			.find( "span" )
-			.remove();
-	}
-
-	if ( callback !== undefined ) {
-		console.log( callback );
-		window[ callback ]()
-	}
-}
-
-/**.
- *
- * @param type
- * @returns {*}
- */
-function toGlyph( type ) {
-	if ( type === "success" )
-		return "glyphicon glyphicon-ok";
-
-	else if ( type === "info" )
-		return "fa fa-info";
-
-	else if ( type === "warning" )
-		return "glyphicon glyphicon-warning-sign";
-
-	else if ( type === "danger" )
-		return "glyphicon glyphicon-remove";
-
-	else if ( type === "error" )
-		return "glyphicon glyphicon-fire";
-}
-
 
 (function ( $ ) {
+	$.fn.formJS = function ( options ) {
+		var obj = this;
+
+		var settings = $.extend( {
+			alerts:      {
+				unexpected: {
+					title:   'Error',
+					message: 'Unexpected error occurred'
+				},
+				failSend:   {
+					title:   'Error',
+					message: 'Unable to send data'
+				}
+			},
+			keys:        {
+				success: 'success',
+				info:    'info',
+				warning: 'warning',
+				error:   'error'
+			},
+			icons:       {
+				loading: '<span class="fas fa-circle-notch fa-spin"></span>',
+				success: '<span class="fas fa-check"></span>',
+				info:    '<span class="fas fa-info"></span>',
+				warning: '<span class="fas fa-exclamation-triangle"></span>',
+				error:   '<span class="fas fa-fire"></span>'
+			},
+			form:        {
+				contentType:    false,
+				alertContainer: '.formJS'
+			},
+			redirection: {
+				message: 'Automatic redirection in a second',
+				delay:   1100
+			},
+			btnSubmit:   '.btn[type="submit"]',
+			callback:    function () {
+			}
+		}, options );
+
+		obj.each( function () {
+			var $this        = $( this );
+			var action       = $this.attr( "action" );
+			var method       = $this.attr( "method" );
+			var btnSubmit    = $this.find( settings.btnSubmit );
+			var currentAlert = $.extend( settings.alerts.unexpected, { type: settings.keys.error } );
+			var formdata;
+			var data;
+
+			$this.submit( function ( e ) {
+				e.preventDefault();
+
+				try {
+					if ( btnSubmit.length === 0 )
+						throw 'Unable to find submit button';
+
+					btnSubmit
+						.append( $( settings.icons.loading ).addClass( 'formJS-loading' ) )
+						.attr( 'disabled' );
+
+					if ( method == "" || method == null ) {
+						throw 'Undefined method of form';
+
+					} else {
+						formdata = (window.FormData) ? new FormData( $this[ 0 ] ) : null;
+						data     = (formdata !== null) ? formdata : $this.serialize();
+
+						$.ajax( {
+							url:         action,
+							type:        method,
+							data:        data,
+							contentType: settings.form.contentType,
+							processData: false
+						} )
+							.done( function ( feedback ) {
+								try {
+									// If no feedback found, write unexpected alert
+									if ( feedback.length === 0 ) {
+										throw 'No data found on response'
+									}
+
+									var feedbackData = $.parseJSON( feedback );
+									var notif        = "";
+
+									$this.checkFeedbackStructure( feedbackData );
+
+									console.log( currentAlert );
+
+									// Fixme Check feedback type is in setting.keys
+									if ( feedbackData.type === settings.keys.success
+										|| feedbackData.type === settings.keys.info
+										|| feedbackData.type === settings.keys.warning
+										|| feedbackData.type === settings.keys.error ) {
+
+
+										// Redirection si type = "success" et si une Url est spécifié
+										if ( feedbackData.type === settings.keys.success && feedbackData.hasOwnProperty( 'url' ) ) {
+
+											notif = ' - ' + settings.redirection.message;
+											setTimeout( function () {
+												window.location.replace( feedbackData.url );
+											}, settings.redirection.delay );
+										}
+
+
+										// Affichage de l'alert
+										currentAlert.type    = feedbackData.type;
+										currentAlert.title   = feedbackData.data.title;
+										currentAlert.message = feedbackData.data.message + notif;
+									}
+								} catch ( error ) {
+									console.error( '[FormJS] ' + error );
+								}
+							} )
+							.fail( function ( error ) {
+								console.error( error );
+							} )
+							.always( function () {
+								console.log( currentAlert );
+								$this.writeAlert();
+							} );
+					}
+				} catch ( error ) {
+					console.error( '[FormJS] ' + error );
+					$this.writeAlert();
+				}
+			} );
+
+			/**
+			 * Check the structure of feedback response
+			 * @param inputData
+			 */
+			$this.checkFeedbackStructure = function ( inputData ) {
+				var feedbackStructure = {
+					type: '',
+					url:  '',
+					data: {
+						title:   '',
+						message: ''
+					}
+				};
+
+				if ( !inputData.hasOwnProperty( 'type' ) )
+					throw 'Invalid feedback structure: "type" missing';
+
+				if ( !inputData.hasOwnProperty( 'data' ) )
+					throw 'Invalid feedback structure: "data" missing';
+
+				if ( !inputData.data.hasOwnProperty( 'title' ) )
+					throw 'Invalid feedback structure: "data.title" missing';
+
+				if ( !inputData.data.hasOwnProperty( 'message' ) )
+					throw 'Invalid feedback structure: "data.message" missing';
+
+				// TODO Valid type value
+
+			};
+
+			/**
+			 * Create DOM alert
+			 */
+			$this.writeAlert = function () {
+				var alert = $( '<div class="alert alert-' + currentAlert.type + ' formjs-' + currentAlert.type + '" role="alert" />' )
+					.html( '<div class="ico">\n\
+								' + settings.icons[ currentAlert.type ] + '\n\
+							</div>\n\
+							<div class="info">\n\
+								<h4>' + currentAlert.title + '</h4>\n\
+								<p>' + currentAlert.message + '</p>\n\
+							</div>' )
+					.hide()
+					.fadeIn( 300 );
+
+				$( settings.form.alertContainer )
+					.empty()
+					.html( alert );
+
+				$( 'html, body' ).animate( {
+					scrollTop: $( settings.form.alertContainer ).offset().top - 55
+				}, 300 );
+
+				var btnSubmit = $( settings.btnSubmit );
+				if ( btnSubmit !== undefined && btnSubmit.length ) {
+					//console.log(btnSender);
+					btnSubmit
+						.find( '.formJS-loading' )
+						.remove();
+				}
+
+				if ( currentAlert.type === settings.keys.success || currentAlert.type === settings.keys.info )
+					console.log( currentAlert.title + " - " + currentAlert.message );
+
+				else if ( currentAlert.type === settings.keys.error )
+					console.error( currentAlert.title + " - " + currentAlert.message );
+
+				else if ( currentAlert.type === settings.keys.warning )
+					console.warn( currentAlert.title + " - " + currentAlert.message );
+
+				else
+					console.log( currentAlert.title + " - " + currentAlert.message );
+
+				settings.callback();
+			};
+
+			/**
+			 * Create the container if it not found
+			 */
+			$this.init = function () {
+				var container = $this.find( settings.form.alertContainer );
+
+				if ( container.length === 0 ) {
+					var $el        = $( '<div/>' );
+					var props      = settings.form.alertContainer.split( '.' ),
+						newelement = $el,
+						id         = '',
+						className  = '';
+					$.each( props, function ( i, val ) {
+						if ( val.indexOf( '#' ) >= 0 ) {
+							id += val.replace( /^#/, '' );
+						} else {
+							className += val + ' ';
+						}
+					} );
+
+					if ( id.length ) newelement.attr( 'id', id );
+					if ( className.length ) newelement.attr( 'class', className.trim() );
+
+					$this.prepend( newelement );
+				}
+			};
+
+			$this.init();
+		} );
+
+		return obj;
+	};
+
+
 	$.fn.setDisplayForm = function () {
 		var disp = ($( window ).width() <= 768) ? "block" : "flex";
 		$( this ).css( "display", disp );
@@ -92,7 +251,7 @@ function toGlyph( type ) {
 	};
 
 
-	$( "form:not(.noForm)" ).submit( function ( e ) {
+	/*$( "form:not(.noForm)" ).submit( function ( e ) {
 		var $this     = $( this );
 		var action    = $this.attr( "action" );
 		var method    = $this.attr( "method" );
@@ -188,7 +347,7 @@ function toGlyph( type ) {
 				} );
 			}
 		}
-	} );
+	} );*/
 })( jQuery );
 
 $( window ).resize( function () {

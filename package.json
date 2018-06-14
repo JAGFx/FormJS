@@ -1,0 +1,39 @@
+{
+	"name":            "jagfx-formjs",
+	"version":         "1.0.0",
+	"description":     "Send form AJAX with feedback",
+	"main":            "index.js",
+	"scripts":         {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository":      {
+		"type": "git",
+		"url":  "git+https://github.com/JAGFx/FormJS.git"
+	},
+	"keywords":        [
+		"feedback",
+		"javascript",
+		"jquery",
+		"ajax",
+		"form",
+		"bootstrap",
+		"bootstrap3",
+		"bootstrap4",
+		"alert",
+		"bs"
+	],
+	"author":          "Emmanuel SMITH <contact@jagfx.fr>",
+	"license":         "GPL-3.0",
+	"bugs":            {
+		"url": "https://github.com/JAGFx/FormJS/issues"
+	},
+	"homepage":        "https://github.com/JAGFx/FormJS#readme",
+	"dependencies":    {
+		"@fortawesome/fontawesome-free-webfonts": "^1.0.9",
+		"jquery":                                 "^3.3.1"
+	},
+	"devDependencies": {
+		"bootstrap":   "^4.1.1",
+		"http-server": "^0.11.1"
+	}
+}
