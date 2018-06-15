@@ -1,84 +1,123 @@
-/**
-	 * Created by PhpStorm.
-	 * @author: SMITH Emmanuel
+/*
+ * Copyright (c) 2018.  JAGFx
+ * @author: SMITH Emmanuel
+ * @version: 2.0.0
  */
 
-/* ------------------------------------------- Alert - Tout type */
+/**
+ * Created by PhpStorm.
+ * @author: SMITH Emmanuel
+ * @version 2.0.0
+ */
+
+.formJS-loading {
+	margin-left: .5rem; }
+
+
+@media (max-width: 768px) {
+	.formJS .alert {
+		flex-direction: column; }
+}
+
 @media (min-width: 768px) {
-	.messageForm .alert > .ico { max-width: 65px; min-width: 65px; }
+	.formJS .alert {
+		flex-direction: row; }
+
+
+	.formJS .alert .ico {
+		max-width: 7rem;
+		min-width: 5rem; }
 }
 
 
-.messageForm .alert { display: none; padding: 0; }
+.formJS .alert {
+	background:  none;
+	border:      none;
+	display:     flex;
+	padding:     0;
+	align-items: stretch;
+	box-shadow:  0 2px 1px #F0F0F0; }
 
 
-.messageForm .alert > .ico {
-	width:      100%;
-	text-align: center;
-	padding:    20px 15px;
-}
+.formJS .alert .ico {
+	width:           100%;
+	text-align:      center;
+	padding:         1.25rem 1rem;
+	display:         flex;
+	flex-direction:  row;
+	align-items:     center;
+	justify-content: center; }
 
 
-.messageForm .alert > .ico > .glyphicon, .messageForm .alert > .ico > .fa { font-size: 2.5em; color: rgba(0, 0, 0, .3); }
+.formJS .alert .ico > * {
+	font-size: 2.5rem; }
 
 
-.messageForm .alert > .info { width: 100%; }
+.formJS .alert .info {
+	width: 100%; }
 
 
-.messageForm .alert > .info > h4 {
+.formJS .alert .info > h4 {
 	text-transform: uppercase;
 	font-family:    'Quicksand', sans-serif;
-	padding:        20px 15px 0 15px;
-	font-size:      150%;
-}
+	padding:        1.25rem 1rem 0 1rem;
+	font-size:      1.5em; }
 
 
-.messageForm .alert > .info > p {
+.formJS .alert .info > p {
 	font-style: italic;
-	padding:    0 15px 15px 15px;
+	padding:    0 1rem 1rem 1rem;
 	margin:     0;
-	color:      #485563;
-}
+	color:      #353B41; }
 
 
-/* ------------------------------------------- Alert - Succes */
-.messageForm .alert.alert-cust-success > .ico { background: #5CB85C; }
+.formJS .alert.formjs-success .ico {
+	background: rgba(40, 167, 69, 0.5);
+	color:      #155925; }
 
 
-.messageForm .alert.alert-cust-success > .info { background: rgba(92, 184, 92, .2); }
+.formJS .alert.formjs-success .info {
+	background: #D4F5DC; }
 
 
-.messageForm .alert.alert-cust-success > .info > h4 { color: #5CB85C; }
+.formJS .alert.formjs-success .info > h4 {
+	color: #155925; }
 
 
-/* ------------------------------------------- Alert - Info */
-.messageForm .alert.alert-cust-info > .ico { background: #3498DB; }
+.formJS .alert.formjs-info .ico {
+	background: rgba(0, 123, 255, 0.5);
+	color:      #004C9E; }
 
 
-.messageForm .alert.alert-cust-info > .info { background: rgba(52, 152, 219, .2); }
+.formJS .alert.formjs-info .info {
+	background: #CCE5FF; }
 
 
-.messageForm .alert.alert-cust-info > .info > h4 { color: #3498DB; }
+.formJS .alert.formjs-info .info > h4 {
+	color: #004C9E; }
 
 
-/* ------------------------------------------- Alert - Warning */
-.messageForm .alert.alert-cust-warning > .ico { background: #F0AD4E; }
+.formJS .alert.formjs-warning .ico {
+	background: rgba(255, 193, 7, 0.5);
+	color:      #876500; }
 
 
-.messageForm .alert.alert-cust-warning > .info { background: rgba(240, 173, 78, .2); }
+.formJS .alert.formjs-warning .info {
+	background: #FFF4D3; }
 
 
-.messageForm .alert.alert-cust-warning > .info > h4 { color: #F0AD4E; }
+.formJS .alert.formjs-warning .info > h4 {
+	color: #876500; }
 
 
-/* ------------------------------------------- Alert - Danger / Error */
-.messageForm .alert.alert-cust-danger > .ico,
-.messageForm .alert.alert-cust-error > .ico { background: #D9534F; }
+.formJS .alert.formjs-error .ico {
+	background: rgba(220, 53, 69, 0.5);
+	color:      #7C151F; }
 
 
-.messageForm .alert.alert-cust-danger > .info,
-.messageForm .alert.alert-cust-error > .info { background: rgba(217, 83, 79, .2); }
+.formJS .alert.formjs-error .info {
+	background: #F9DFE1; }
 
 
-.messageForm .alert.alert-cust-danger > .info > h4,
-.messageForm .alert.alert-cust-error > .info > h4 { color: #D9534F; }
+.formJS .alert.formjs-error .info > h4 {
+	color: #7C151F; }

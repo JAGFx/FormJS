@@ -1,3 +1,9 @@
+/*
+ * Copyright (c) 2018.  JAGFx
+ * @author: SMITH Emmanuel
+ * @version: 2.0.0
+ */
+
 /**
  * Created by PhpStorm.
  * @author: SMITH Emmanuel
@@ -23,7 +29,7 @@
 				success: 'success',
 				info:    'info',
 				warning: 'warning',
-				error:   'error'
+				error:   'danger'
 			},
 			icons:       {
 				loading: '<span class="fas fa-circle-notch fa-spin"></span>',
@@ -33,7 +39,9 @@
 				error:   '<span class="fas fa-fire"></span>'
 			},
 			form:        {
-				contentType:    false,
+				ajaxSettings:   {
+					contentType: false
+				},
 				alertContainer: '.formJS'
 			},
 			redirection: {
@@ -50,9 +58,10 @@
 			var action       = $this.attr( "action" );
 			var method       = $this.attr( "method" );
 			var btnSubmit    = $this.find( settings.btnSubmit );
-			var currentAlert = $.extend( settings.alerts.unexpected, { type: settings.keys.error } );
+			var currentAlert = $.extend( settings.alerts.unexpected, { type: 'error' } );
 			var formdata;
 			var data;
+			var ajaxSettings;
 
 			$this.submit( function ( e ) {
 				e.preventDefault();
@@ -69,16 +78,17 @@
 						throw 'Undefined method of form';
 
 					} else {
-						formdata = (window.FormData) ? new FormData( $this[ 0 ] ) : null;
-						data     = (formdata !== null) ? formdata : $this.serialize();
-
-						$.ajax( {
+						formdata     = (window.FormData) ? new FormData( $this[ 0 ] ) : null;
+						data         = (formdata !== null) ? formdata : $this.serialize();
+						ajaxSettings = $.extend( settings.form.ajaxSettings, {
 							url:         action,
 							type:        method,
 							data:        data,
 							contentType: settings.form.contentType,
 							processData: false
-						} )
+						} );
+
+						$.ajax( ajaxSettings )
 							.done( function ( feedback ) {
 								try {
 									// If no feedback found, write unexpected alert
@@ -91,30 +101,22 @@
 
 									$this.checkFeedbackStructure( feedbackData );
 
-									console.log( currentAlert );
+									//console.log( currentAlert );
 
-									// Fixme Check feedback type is in setting.keys
-									if ( feedbackData.type === settings.keys.success
-										|| feedbackData.type === settings.keys.info
-										|| feedbackData.type === settings.keys.warning
-										|| feedbackData.type === settings.keys.error ) {
+									// Redirection si type = "success" et si une Url est spécifié
+									if ( feedbackData.type === settings.keys.success && feedbackData.hasOwnProperty( 'url' ) ) {
 
-
-										// Redirection si type = "success" et si une Url est spécifié
-										if ( feedbackData.type === settings.keys.success && feedbackData.hasOwnProperty( 'url' ) ) {
-
-											notif = ' - ' + settings.redirection.message;
-											setTimeout( function () {
-												window.location.replace( feedbackData.url );
-											}, settings.redirection.delay );
-										}
-
-
-										// Affichage de l'alert
-										currentAlert.type    = feedbackData.type;
-										currentAlert.title   = feedbackData.data.title;
-										currentAlert.message = feedbackData.data.message + notif;
+										notif = ' - ' + settings.redirection.message;
+										setTimeout( function () {
+											window.location.replace( feedbackData.url );
+										}, settings.redirection.delay );
 									}
+
+									// Affichage de l'alert
+									currentAlert.type    = feedbackData.type;
+									currentAlert.title   = feedbackData.data.title;
+									currentAlert.message = feedbackData.data.message + notif;
+
 								} catch ( error ) {
 									console.error( '[FormJS] ' + error );
 								}
@@ -123,7 +125,7 @@
 								console.error( error );
 							} )
 							.always( function () {
-								console.log( currentAlert );
+								//console.log( currentAlert );
 								$this.writeAlert();
 							} );
 					}
@@ -159,15 +161,15 @@
 				if ( !inputData.data.hasOwnProperty( 'message' ) )
 					throw 'Invalid feedback structure: "data.message" missing';
 
-				// TODO Valid type value
-
+				if ( Object.keys( settings.keys ).indexOf( inputData.type ) === -1 )
+					throw 'Invalid feedback structure: "type" wrong. Accepted values: ' + Object.keys( settings.keys ).toString();
 			};
 
 			/**
 			 * Create DOM alert
 			 */
 			$this.writeAlert = function () {
-				var alert = $( '<div class="alert alert-' + currentAlert.type + ' formjs-' + currentAlert.type + '" role="alert" />' )
+				var alert = $( '<div class="alert formjs-' + currentAlert.type + '" role="alert" />' )
 					.html( '<div class="ico">\n\
 								' + settings.icons[ currentAlert.type ] + '\n\
 							</div>\n\

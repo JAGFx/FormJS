@@ -1,0 +1,103 @@
+/*!
+ * Copyright (c) 2018.  JAGFx
+ * @author: SMITH Emmanuel
+ * @version: 2.0.0
+ */
+
+/**
+ * Created by PhpStorm.
+ * @author: SMITH Emmanuel
+ * @version 2.0.0
+ */
+@import "variables";
+
+
+.formJS-loading { margin-left: .5rem; }
+
+
+.formJS {
+	@media (max-width: 768px) {
+		.alert { flex-direction: column; }
+	}
+	
+	@media (min-width: 768px) {
+		.alert { flex-direction: row; }
+		.alert .ico { max-width: 7rem; min-width: 5rem; }
+	}
+	
+	.alert {
+		background:  none;
+		border:      none;
+		display:     flex;
+		padding:     0;
+		align-items: stretch;
+		box-shadow:  0 2px 1px $cShadow;
+		
+		.ico {
+			width:           100%;
+			text-align:      center;
+			padding:         1.25rem 1rem;
+			display:         flex;
+			flex-direction:  row;
+			align-items:     center;
+			justify-content: center;
+			
+			> * {
+				font-size: 2.5rem;
+			}
+		}
+		
+		.info {
+			width: 100%;
+			> h4 {
+				text-transform: uppercase;
+				font-family:    'Quicksand', sans-serif;
+				padding:        1.25rem 1rem 0 1rem;
+				font-size:      1.5em;
+			}
+			
+			> p {
+				font-style: italic;
+				padding:    0 1rem 1rem 1rem;
+				margin:     0;
+				color:      lighten($cIco, $amountDarken);
+			}
+		}
+		
+		&.formjs-success {
+			.ico {
+				background: transparentize($cSuccess, $amountDarken);
+				color:      darken($cSuccess, 19%);
+			}
+			.info { background: lighten($cSuccess, 49%); }
+			.info > h4 { color: darken($cSuccess, 19%); }
+		}
+		
+		&.formjs-info {
+			.ico {
+				background: transparentize($cInfo, $amountDarken);
+				color:      darken($cInfo, 19%);
+			}
+			.info { background: lighten($cInfo, 40%); }
+			.info > h4 { color: darken($cInfo, 19%); }
+		}
+		
+		&.formjs-warning {
+			.ico {
+				background: transparentize($cWarning, $amountDarken);
+				color:      darken($cWarning, 25%);
+			}
+			.info { background: lighten($cWarning, 40%); }
+			.info > h4 { color: darken($cWarning, 25%); }
+		}
+		
+		&.formjs-error {
+			.ico {
+				background: transparentize($cError, $amountDarken);
+				color:      darken($cError, 25%);
+			}
+			.info { background: lighten($cError, 39%); }
+			.info > h4 { color: darken($cError, 25%); }
+		}
+	}
+}
