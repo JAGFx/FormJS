@@ -78,7 +78,6 @@
 							url:         action,
 							type:        method,
 							data:        data,
-							contentType: settings.form.contentType,
 							processData: false
 						} );
 
