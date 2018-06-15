@@ -4,11 +4,6 @@
  * @version: 2.0.0
  */
 
-/**
- * Created by PhpStorm.
- * @author: SMITH Emmanuel
- * @version 2.0.0
- */
 @import "variables";
 
 
@@ -51,6 +46,7 @@
 			width: 100%;
 			> h4 {
 				text-transform: uppercase;
+				/* TODO Add common font */
 				font-family:    'Quicksand', sans-serif;
 				padding:        1.25rem 1rem 0 1rem;
 				font-size:      1.5em;
