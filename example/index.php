@@ -4,14 +4,6 @@
  * @author: SMITH Emmanuel
  * @version: 2.0.0
  */
-
-	/**
-	 * Created by PhpStorm.
-	 *
-	 * @author: SMITH Emmanuel
-	 * Date: 14-Jun-18
-	 * Time: 19:40
-	 */
 	
 	if ( isset( $_POST[ 'typeFeedback' ] ) ) {
 		// Post traitment

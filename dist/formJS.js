@@ -4,12 +4,6 @@
  * @version: 2.0.0
  */
 
-/**
- * Created by PhpStorm.
- * @author: SMITH Emmanuel
- * @version 2.0.0
- */
-
 (function ( $ ) {
 	$.fn.formJS = function ( options ) {
 		var obj = this;
