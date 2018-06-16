@@ -12,11 +12,19 @@
 .formJS {
 	@media (max-width: 768px) {
 		.alert { flex-direction: column; }
+		.alert .info {
+			> h4 { padding: 0 1rem 0 1rem; }
+			> p { padding: 0 1rem 1rem 1rem; }
+		}
 	}
 	
 	@media (min-width: 768px) {
 		.alert { flex-direction: row; }
 		.alert .ico { min-width: 5rem; }
+		.alert .info {
+			> h4 { padding: 1.25rem 1rem 0 0; }
+			> p { padding: 0 1rem 1rem 0; }
+		}
 	}
 	
 	.alert {
@@ -47,14 +55,12 @@
 			> h4 {
 				text-transform: uppercase;
 				font-family:    'Quicksand', sans-serif;
-				padding:        1.25rem 1rem 0 0;
 				font-size:      1.5em;
 				margin:         0;
 			}
 			
 			> p {
 				font-style: italic;
-				padding:    0 1rem 1rem 0;
 				margin:     0;
 				color:      lighten($cIco, $amountDarken);
 			}
