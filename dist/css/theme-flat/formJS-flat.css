@@ -8,12 +8,10 @@
 .formJS-loading {
 	margin-left: .5rem; }
 
-
 @media (max-width: 768px) {
 	.formJS .alert {
 		flex-direction: column; }
 }
-
 
 @media (min-width: 768px) {
 	.formJS .alert {
@@ -23,7 +21,6 @@
 	.formJS .alert .ico {
 		min-width: 5rem; }
 }
-
 
 .formJS .alert {
 	background:         rgba(0, 0, 0, 0.03);
