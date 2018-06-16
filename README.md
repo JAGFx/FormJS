@@ -22,7 +22,11 @@ jQuery plugin to give feedback to user with ajax request
 
 <!-- /DESCRIPTION -->
 
-### ![DEMO](http://labs.jagfx.fr/formJS/example/)
+### [DEMO](http://labs.jagfx.fr/formJS/example/)
+
+## Fonts
+
+* [Quicksand regular](https://fonts.google.com/specimen/Quicksand?selection.family=Quicksand)
 
 <!-- INSTALL/ -->
 
