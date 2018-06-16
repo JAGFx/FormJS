@@ -1,127 +1,52 @@
-# FormJS
-[![Latest Stable Version](https://poser.pugx.org/jagfx/form-js/v/stable)](https://packagist.org/packages/jagfx/form-js)
-[![Total Downloads](https://poser.pugx.org/jagfx/form-js/downloads)](https://packagist.org/packages/jagfx/form-js)
-[![Latest Unstable Version](https://poser.pugx.org/jagfx/form-js/v/unstable)](https://packagist.org/packages/jagfx/form-js)
-[![License](https://poser.pugx.org/jagfx/form-js/license)](https://packagist.org/packages/jagfx/form-js?format=flat)
+<!-- TITLE/ -->
 
-## Instalation
-#### Bower
-````
-bower install jagfx-form-js
-````
+<h1>Feedback jQuery plugin</h1>
 
-#### Composer
-````
-composer require jagfx/form-js:dev-master
-````
-
-## Guide d'utilisation Form  
-Dans tous les cas, la page de traitement appelé sera celle de **`action`**. Il peut être **`NULL`**
-
-##### HTML
-Mettre l'attribut **`data-preventDefault`** à **`yes`**.
-Une requête va être effectué vers **`action`** avec les données du formulaire. La réponse sera récupérée par l'Ajax  
-```html
-<form method="..." action="maPage.php" data-preventDefault="yes">
-	<div class="messageForm"></div>
-  	...
-</form>
-```  
+<!-- /TITLE -->
 
 
+<!-- BADGES/ -->
 
-##### Javascript / JQuery
-Le fichier forms.js comprend le script pour récupérer et interpreter le résultat du traitement d'**`action`**.  
-**`alert.type`**, **`alert.titre`** et **`alert.msg`** sont définis grâce aux données **`data`** récupérées.  
-*Note: La structure de retour est définie dans [PHP](#php)*  
-```javascript
-...
-success:     function ( retour ) {
-    if ( retour == '' ) {
-        writeAlert( $this, alert, btnSubmit );
-        return;
-    }
-    
-    var dataRetour = $.parseJSON( retour );
-    var notif      = "";
-    
-    // Le Type doit strictement être parmi "success", "info", "warning" ou "danger"
-    if ( dataRetour.Type === "success"
-        || dataRetour.Type === "warning"
-        || dataRetour.Type === "danger"
-        || dataRetour.Type === "info" ) {
-    
-        // Redirection si Type = "success" et si une Url est spécifié
-        if ( dataRetour.Type === "success"
-            && dataRetour.Url != null ) {
-    
-            notif = " - Redirection automatique dans une seconde";
-            setTimeout( function () {
-                window.location.replace( dataRetour.Url );
-            }, 1100 );
-        }
-    
-        // Affichage de l'alert
-        alert.type  = dataRetour.Type;
-        alert.titre = dataRetour.Data.Titre;
-        alert.msg   = dataRetour.Data.Message + notif;
-        writeAlert( $this, alert, btnSubmit, callback );
-        return;
-    
-    } else {
-        writeAlert( $this, alert, btnSubmit );
-        return;
-    }
-}
-...
-```
-**`dataRetour`** : Données renvoyées par le traitement d'**`action`**  
-**`dataRetour.Type`** : Type de message à afficher: **`success`**, **`warning`** ou **`danger`**  
-**`dataRetour.Data.Titre`** : Titre du message à afficher.    
-**`dataRetour.Data.Message`** : Message de retour à afficher.  
+<span class="badge-npmversion"><a href="https://npmjs.org/package/jagfx-formjs" title="View this project on NPM"><img src="https://img.shields.io/npm/v/jagfx-formjs.svg" alt="NPM version" /></a></span>
+<span class="badge-daviddm"><a href="https://david-dm.org/JAGFx/FormJS" title="View the status of this project's dependencies on DavidDM"><img src="https://img.shields.io/david/JAGFx/FormJS.svg" alt="Dependency Status" /></a></span>
+<span class="badge-daviddmdev"><a href="https://david-dm.org/JAGFx/FormJS#info=devDependencies" title="View the status of this project's development dependencies on DavidDM"><img src="https://img.shields.io/david/dev/JAGFx/FormJS.svg" alt="Dev Dependency Status" /></a></span>
+<span class="badge-badge"><a href="https://scrutinizer-ci.com/g/JAGFx/FormJS/build-status/master" title="Build Status"><img src="https://scrutinizer-ci.com/g/JAGFx/FormJS/badges/build.png?b=master" alt="Build Status" /></a></span>
+<span class="badge-badge"><a href="https://scrutinizer-ci.com/g/JAGFx/FormJS/?branch=master" title="Scrutinizer Code Quality"><img src="https://scrutinizer-ci.com/g/JAGFx/FormJS/badges/quality-score.png?b=master" alt="Scrutinizer Code Quality" /></a></span>
+
+<!-- /BADGES -->
 
 
+<!-- DESCRIPTION/ -->
 
-##### PHP  
-La structure de retour de l'envoi par Ajax du traitement est la suivante:  
-```php
-	$retour = array(
-		"Type" => "success",
-		"Data" => array(
-			"Titre" => "UnTitre",
-			"Message" => "Un petit message"
-		),
-		"Url" => "unePetiteUrl.php"
-	);
-```
-A noter:
-* Le **`"Type"`** de **`$retour`** doit être **strictement** égale aux types décris dans [Javascript / JQuery](#javascript--jquery).  
-* L'**`"Url"`** si elle n'est pas spécifié doit avoir la valeur **`null`** dans le cas d'un **`success`**.  
-* Le nom des clés dans **`$retour`** sont sensibles à la case.  
+jQuery plugin to give feedback to user with ajax request
 
-Pour terminer le traitement et envoyer le tous, il suffit d'encoder **`$retour`** grâce à la fonction en PHP **`json_encode()`** et de l'afficher.  
-```php
-	echo json_encode($retour);
-```
-
-##### Exemple
-Cas 1 - Succès sans redirection  
-* **`$retour["Type"] = "success"`**  
-* **`$retour["Data"]["Titre"] = "Succès"`**  
-* **`$retour["Data"]["Message"] = "Tout c'est bien passé !"`**  
-* **`$retour["Url"] = null`**  
-![Exemple de message - Success sans redirection](http://www.jagfx.fr/Uploads/sucess_-_form_arters.PNG)  
-
-Cas 2 - Succès avec redirection  
-* **`$retour["Type"] = "success"`**  
-* **`$retour["Data"]["Titre"] = "unTitre"`**  
-* **`$retour["Data"]["Message"] = "Un petit message"`**  
-* **`$retour["Url"] = "unePetiteUrl.php"`**  
-![Exemple de message - Success avec redirection](http://www.jagfx.fr/Uploads/sucess_URL-_form_arters.PNG)
+<!-- /DESCRIPTION -->
 
 
-Cas 3 - Autres cas (Danger ou Warning)  
-* **`$retour["Type"] = "danger"`**  
-* **`$retour["Data"]["Titre"] = "Erreur Traitement"`**  
-* **`$retour["Data"]["Message"] = "Impossible d'envoyer les données. Verifiez le champs d'action"`**  
-![Exemple de message - Autre cas](http://www.jagfx.fr/Uploads/error_-_form_arters.PNG)  
+<!-- INSTALL/ -->
+
+<h2>Install</h2>
+
+<a href="https://npmjs.com" title="npm is a package manager for javascript"><h3>NPM</h3></a><ul>
+<li>Install: <code>npm install --save jagfx-formjs</code></li>
+<li>Module: <code>require('jagfx-formjs')</code></li></ul>
+
+<!-- /INSTALL -->
+
+
+## Usage
+Usage instructions go here
+
+<!-- LICENSE/ -->
+
+<h2>License</h2>
+
+Unless stated otherwise all works are:
+
+<ul><li>Copyright &copy; <a href="http://www.jagfx.fr">SMITH Emmanuel</a></li></ul>
+
+and licensed under:
+
+<ul><li><a href="http://spdx.org/licenses/GPL-3.0.html">GNU General Public License v3.0 only</a></li></ul>
+
+<!-- /LICENSE -->

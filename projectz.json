@@ -1,0 +1,51 @@
+{
+	"title":        "Feedback jQuery plugin",
+	"name":         "jagfx-formjs",
+	"homepage":     "https://github.com/JAGFx/FormJS#readme",
+	"demo":         "https://github.com/JAGFx/FormJS#readme",
+	"description":  "jQuery plugin to give feedback to user with ajax request",
+	"license":      "GPL-3.0",
+	"browsers":     false,
+	"author":       "Emmanuel SMITH <contact@jagfx.fr> (http://www.jagfx.fr)",
+	"maintainers":  [
+		"Emmanuel SMITH <contact@jagfx.fr> (http://www.jagfx.fr)"
+	],
+	"sponsors":     [ ],
+	"contributors": [ ],
+	"repository":   {
+		"type": "git",
+		"url":  "https://github.com/JAGFx/FormJS.git"
+	},
+	"bugs":         {
+		"url": "https://github.com/JAGFx/FormJS/issues"
+	},
+	"badges":       {
+		"list":   [
+			"npmversion",
+			"daviddm",
+			"daviddmdev",
+			[
+				"badge",
+				{
+					"image": "https://scrutinizer-ci.com/g/JAGFx/FormJS/badges/build.png?b=master",
+					"alt":   "Build Status",
+					"url":   "https://scrutinizer-ci.com/g/JAGFx/FormJS/build-status/master",
+					"title": "Build Status"
+				}
+			],
+			[
+				"badge",
+				{
+					"image": "https://scrutinizer-ci.com/g/JAGFx/FormJS/badges/quality-score.png?b=master",
+					"alt":   "Scrutinizer Code Quality",
+					"url":   "https://scrutinizer-ci.com/g/JAGFx/FormJS/?branch=master",
+					"title": "Scrutinizer Code Quality"
+				}
+			]
+		],
+		"config": {
+		}
+	},
+	"packages":     {
+	}
+}
