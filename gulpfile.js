@@ -32,8 +32,7 @@ gulp.task( 'scss:watch', function () {
 } );
 
 gulp.task( 'scss:dist', gulp.series( [ 'scss:build' ], function () {
-	console.log( distCSS + '**/*.css' );
-	return gulp.src( distCSS + '**/*.css' )
+	return gulp.src( [ distCSS + '**/*.css', '!' + distCSS + '**/*.min.css' ] )
 		.pipe( cleanCSS( { compatibility: 'ie8' } ) )
 		.pipe( rename( {
 			suffix: '.min'
@@ -48,7 +47,9 @@ gulp.task( 'js:dist', function () {
 				src: '.js',
 				min: '.min.js'
 			},
-			ignoreFiles: [ '-min.js' ]
+			ignoreFiles: [ '*.min.js' ]
 		} ) )
 		.pipe( gulp.dest( 'dist' ) )
 } );
+
+gulp.task( 'default', gulp.series( [ 'scss:dist', 'js:dist' ] ) );
