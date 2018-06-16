@@ -3,7 +3,6 @@
  * @author: SMITH Emmanuel
  * @version: 2.0.0
  */
-
 @import "variables";
 
 
@@ -17,7 +16,7 @@
 	
 	@media (min-width: 768px) {
 		.alert { flex-direction: row; }
-		.alert .ico { max-width: 7rem; min-width: 5rem; }
+		.alert .ico { min-width: 5rem; }
 	}
 	
 	.alert {
@@ -29,7 +28,6 @@
 		box-shadow:  0 2px 1px $cShadow;
 		
 		.ico {
-			width:           100%;
 			text-align:      center;
 			padding:         1.25rem 1rem;
 			display:         flex;

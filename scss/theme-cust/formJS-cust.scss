@@ -1,0 +1,114 @@
+/*!
+ * Copyright (c) 2018.  JAGFx
+ * @author: SMITH Emmanuel
+ * @version: 2.0.0
+ */
+@import "variables";
+
+
+.formJS-loading { margin-left: .5rem; }
+
+
+.formJS {
+	@media (max-width: 768px) {
+		.alert { flex-direction: column; }
+	}
+	
+	@media (min-width: 768px) {
+		.alert { flex-direction: row; }
+		.alert .ico { min-width: 5rem; }
+	}
+	
+	.alert {
+		background:  none;
+		display:     flex;
+		padding:     0;
+		align-items: stretch;
+		border:      1px solid $cShadow;
+		overflow:    hidden;
+		
+		.ico {
+			text-align:      center;
+			padding:         1.25rem 1rem;
+			display:         flex;
+			flex-direction:  row;
+			align-items:     center;
+			justify-content: center;
+			
+			> * {
+				font-size: 2.5rem;
+			}
+		}
+		
+		.info {
+			width: 100%;
+			> h4 {
+				text-transform: uppercase;
+				/* TODO Add common font */
+				font-family:    'Quicksand', sans-serif;
+				padding:        1.25rem 1rem 0 1rem;
+				font-size:      1.5em;
+				margin:         0;
+			}
+			
+			> p {
+				font-style: italic;
+				padding:    0 1rem 1rem 1rem;
+				margin:     0;
+				color:      lighten($cIco, $amountDarken);
+			}
+		}
+		
+		&.formjs-success {
+			.ico {
+				background: linear-gradient(to bottom right, $cSuccessDark, $cSuccessLight);
+				color:      lighten($cWhite, 100%);
+				
+				> * {
+					text-shadow: 2px 2px .5rem $cShadowDark;
+				}
+			}
+			.info { background: $cAlert; }
+			.info > h4 { color: $cSuccessDark; }
+		}
+		
+		&.formjs-info {
+			.ico {
+				background: linear-gradient(to bottom right, $cInfoDark, $cInfoLight);
+				color:      lighten($cWhite, 100%);
+				
+				> * {
+					text-shadow: 2px 2px .5rem $cShadowDark;
+				}
+			}
+			.info { background: $cAlert; }
+			.info > h4 { color: $cInfoDark; }
+		}
+		
+		&.formjs-warning {
+			.ico {
+				background: linear-gradient(to bottom right, $cWarningDark, $cWarningLight);
+				color:      lighten($cWhite, 100%);
+				
+				> * {
+					text-shadow: 2px 2px .5rem $cShadowDark;
+				}
+			}
+			.info { background: $cAlert; }
+			.info > h4 { color: $cWarningDark; }
+		}
+		
+		&.formjs-error {
+			.ico {
+				background: linear-gradient(to bottom right, $cErrorDark, $cErrorLight);
+				color:      lighten($cWhite, 100%);
+				
+				> * {
+					text-shadow: 2px 2px .5rem $cShadowDark;
+				}
+			}
+			.info { background: $cAlert; }
+			.info > h4 { color: $cErrorDark; }
+		}
+	}
+}
