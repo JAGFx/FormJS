@@ -22,6 +22,7 @@ jQuery plugin to give feedback to user with ajax request
 
 <!-- /DESCRIPTION -->
 
+### ![DEMO](http://labs.jagfx.fr/formJS/example/)
 
 <!-- INSTALL/ -->
 

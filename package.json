@@ -1,17 +1,17 @@
 {
-  "name":            "jagfx-formjs",
-  "version":         "1.0.0",
-  "description":     "jQuery plugin to give feedback to user with ajax request",
-  "scripts":         {
-    "scss:build":     "node-sass --output-style compressed scss/formJS.scss > dist/formJS.min.css",
+	"name":          "jagfx-formjs",
+	"version":       "1.0.0",
+	"description":   "jQuery plugin to give feedback to user with ajax request",
+	"scripts":       {
+		"scss:build": "node-sass --output-style compressed scss/formJS.scss > dist/formJS.min.css",
     "scss:build-dev": "node-sass --output-style expanded scss/formJS.scss > dist/formJS.css",
-    "test":           "echo \"Error: no test specified\" && exit 1"
+		"test":       "echo \"Error: no test specified\" && exit 1"
   },
-  "repository":      {
-    "type": "git",
-    "url":  "https://github.com/JAGFx/FormJS.git"
+	"repository":    {
+    "type":    "git",
+		"url": "https://github.com/JAGFx/FormJS.git"
   },
-  "keywords":        [
+	"keywords":      [
     "feedback",
     "javascript",
     "jquery",
@@ -24,27 +24,27 @@
     "bs",
     "plugin"
   ],
-  "author":          "SMITH Emmanuel <contact@jagfx.fr> (http://www.jagfx.fr)",
-  "contributors":    [
+	"author":        "SMITH Emmanuel <contact@jagfx.fr> (http://www.jagfx.fr)",
+	"contributors":  [
     "SMITH Emmanuel <contact@jagfx.fr> (http://www.jagfx.fr)"
   ],
-  "license":         "GPL-3.0",
-  "bugs":            {
+	"license":       "GPL-3.0",
+	"bugs":          {
     "url": "https://github.com/JAGFx/FormJS/issues"
   },
-  "homepage":        "https://github.com/JAGFx/FormJS#readme",
-  "dependencies":    {
+	"homepage":      "https://github.com/JAGFx/FormJS#readme",
+	"dependencies":  {
     "@fortawesome/fontawesome-free-webfonts": "^1.0.9",
-    "jquery":                                 "^3.3.1"
+		"jquery":                             "^3.3.1"
   },
   "devDependencies": {
-    "bootstrap":   "^4.1.1",
+	  "bootstrap": "^4.1.1",
     "http-server": "^0.11.1"
   },
-  "maintainers":     [
+	"maintainers":   [
     "SMITH Emmanuel <contact@jagfx.fr> (http://www.jagfx.fr)"
   ],
-  "main":            [
+	"main":          [
     "dist/formJS.css",
     "dist/formJS.js"
   ]
