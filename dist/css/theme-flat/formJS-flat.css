@@ -1,0 +1,118 @@
+/*
+ * Copyright (c) 2018.  JAGFx
+ * @author: SMITH Emmanuel
+ * @version: 2.0.0
+ */
+
+
+.formJS-loading {
+	margin-left: .5rem; }
+
+
+@media (max-width: 768px) {
+	.formJS .alert {
+		flex-direction: column; }
+}
+
+
+@media (min-width: 768px) {
+	.formJS .alert {
+		flex-direction: row; }
+
+
+	.formJS .alert .ico {
+		min-width: 5rem; }
+}
+
+
+.formJS .alert {
+	background:         rgba(0, 0, 0, 0.03);
+	display:            flex;
+	padding:            0;
+	align-items:        stretch;
+	overflow:           hidden;
+	border:             1px solid rgba(0, 0, 0, 0.03);
+	border-bottom:      6px solid transparent;
+	-webkit-box-shadow: 0 2px 1px #F0F0F0;
+	-moz-box-shadow:    0 2px 1px #F0F0F0;
+	box-shadow:         0 2px 1px #F0F0F0; }
+
+
+.formJS .alert .ico {
+	text-align:      center;
+	padding:         1.25rem 1rem;
+	display:         flex;
+	flex-direction:  row;
+	align-items:     center;
+	justify-content: center; }
+
+
+.formJS .alert .ico > * {
+	font-size: 2.5rem; }
+
+
+.formJS .alert .info {
+	width: 100%; }
+
+
+.formJS .alert .info > h4 {
+	text-transform: uppercase;
+	font-family:    'Quicksand', sans-serif;
+	padding:        1.25rem 1rem 0 0;
+	font-size:      1.5em;
+	margin:         0; }
+
+
+.formJS .alert .info > p {
+	font-style: italic;
+	padding:    0 1rem 1rem 0;
+	margin:     0;
+	color:      #353B41; }
+
+
+.formJS .alert.formjs-success {
+	border-bottom-color: #2DBDA8; }
+
+
+.formJS .alert.formjs-success .ico {
+	color: #2DBDA8; }
+
+
+.formJS .alert.formjs-success .info > h4 {
+	color: #2DBDA8; }
+
+
+.formJS .alert.formjs-info {
+	border-bottom-color: #2C97DE; }
+
+
+.formJS .alert.formjs-info .ico {
+	color: #2C97DE; }
+
+
+.formJS .alert.formjs-info .info > h4 {
+	color: #2C97DE; }
+
+
+.formJS .alert.formjs-warning {
+	border-bottom-color: #EFC663; }
+
+
+.formJS .alert.formjs-warning .ico {
+	color: #EFC663; }
+
+
+.formJS .alert.formjs-warning .info > h4 {
+	color: #EFC663; }
+
+
+.formJS .alert.formjs-error {
+	border-bottom-color: #CC3E4A; }
+
+
+.formJS .alert.formjs-error .ico {
+	color: #CC3E4A; }
+
+
+.formJS .alert.formjs-error .info > h4 {
+	color: #CC3E4A; }
