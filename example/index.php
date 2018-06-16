@@ -79,10 +79,79 @@
 				
 				<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet" >
 				
+				<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/solid.css" integrity="sha384-Rw5qeepMFvJVEZdSo1nDQD5B6wX0m7c5Z/pLNvjkB14W6Yki1hKbSEQaX9ffUbWe" crossorigin="anonymous" >
+				<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/fontawesome.css" integrity="sha384-GVa9GOgVQgOk+TNYXu7S/InPTfSDTtBalSgkgqQ7sCik56N9ztlkoTr2f/T44oKV" crossorigin="anonymous" >
+				<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/brands.css" integrity="sha384-VGCZwiSnlHXYDojsRqeMn3IVvdzTx5JEuHgqZ3bYLCLUBV8rvihHApoA1Aso2TZA" crossorigin="anonymous" >
+				
 				<link rel="stylesheet" href="../dist/css/theme-flat/formJS-flat.css" id="styleAlert" >
 				
 				<style >
 					body { background: #f7f7f7; }
+					
+					
+					.author {
+						font-family: 'Quicksand', sans-serif;
+					}
+					
+					
+					.author > .btn {
+						border-radius: 0;
+						box-shadow:    0 2px 2px #d8d8d8;
+					}
+					
+					
+					.author .btn-web {
+						background: #2C97DE;
+						color:      #fff;
+					}
+					
+					
+					.author .btn-web > i {
+						background: #2c7ec5;
+						color:      #fff;
+					}
+					
+					
+					.author .btn-web:hover, .author .btn-web:active, .author .btn-web:focus {
+						background: #2c7ec5;
+						color:      #fff;
+					}
+					
+					
+					.author .btn-npm {
+						background: #cb3837;
+						color:      #fff;
+					}
+					
+					
+					.author .btn-npm > i {
+						background: #ba3837;
+						color:      #fff;
+					}
+					
+					
+					.author .btn-npm:hover, .author .btn-npm:active, .author .btn-npm:focus {
+						background: #ba3837;
+						color:      #fff;
+					}
+					
+					
+					.author .btn-git {
+						background: #24292e;
+						color:      #fff;
+					}
+					
+					
+					.author .btn-git > i {
+						background: #666d72;
+						color:      #fff;
+					}
+					
+					
+					.author .btn-git:hover, .author .btn-git:active, .author .btn-git:focus {
+						background: #666d72;
+						color:      #fff;
+					}
 				</style >
 			</head >
 			<body class="container" >
@@ -134,7 +203,23 @@
 							</div >
 						</div >
 					</div >
-				
+					<div class="col-12" >
+						<div class="py-3 text-center author" >
+							<h2 >SMITH Emmanuel</h2 >
+							<a class="btn btn-sm p-0 pr-2 btn-web" href="https://www.jagfx.fr" target="_blank" title="Personal website" >
+								<i class="fas fa-globe p-2 mr-1" ></i >
+								www.jagfx.fr
+							</a >
+							<a class="btn btn-sm p-0 pr-2 btn-npm" href="https://www.npmjs.com/package/jagfx-formjs" target="_blank" title="NPM repository page" >
+								<i class="fab fa-npm p-2 mr-1" ></i >
+								JAGFx
+							</a >
+							<a class="btn btn-sm p-0 pr-2 btn-git" href="https://github.com/JAGFx" target="_blank" title="Github repository" >
+								<i class="fab fa-github p-2 mr-1" ></i >
+								jagfx-formjs
+							</a >
+						</div >
+					</div >
 				</div >
 				
 				<script src="../node_modules/jquery/dist/jquery.js" ></script >
