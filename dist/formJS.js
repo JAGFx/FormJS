@@ -53,12 +53,18 @@
 			var method       = $this.attr( "method" );
 			var btnSubmit    = $this.find( settings.btnSubmit );
 			var currentAlert = $.extend( settings.alerts.unexpected, { type: 'error' } );
+			var ajaxPending  = false;
 			var formdata;
 			var data;
 			var ajaxSettings;
 
 			$this.submit( function ( e ) {
 				e.preventDefault();
+
+				if ( ajaxPending === false )
+					ajaxPending = true;
+
+				else return;
 
 				try {
 					if ( btnSubmit.length === 0 )
@@ -67,6 +73,8 @@
 					btnSubmit
 						.append( $( settings.icons.loading ).addClass( 'formJS-loading' ) )
 						.attr( 'disabled' );
+
+					btnSubmit.addClass( 'disabled' );
 
 					if ( method == "" || method == null ) {
 						throw 'Undefined method of form';
@@ -187,6 +195,10 @@
 					btnSubmit
 						.find( '.formJS-loading' )
 						.remove();
+
+					btnSubmit.removeClass( 'disabled' );
+
+					ajaxPending = false;
 				}
 
 				if ( currentAlert.type === settings.keys.success || currentAlert.type === settings.keys.info )
