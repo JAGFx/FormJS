@@ -1,0 +1,47 @@
+/*!
+ * Copyright (c) 2018.  JAGFx
+ * @author: SMITH Emmanuel
+ * @version: 2.0.0
+ */
+@import "../node_modules/bourbon/core/bourbon";
+
+
+$cDark: #343A40 !default;
+$cLight: #F0F0F0 !default;
+$amountDarken: 0.5 !default;
+
+/* Shadow */
+$cShadow: $cLight !default;
+$cShadowDark: transparentize($cDark, .9) !default;
+
+/* ALert */
+$cAlert: rgba($cDark, 0.03) !default;
+$bgAlert: none !default;
+$bAlert: none !default;
+$pAlert: 0 !default;
+$bsAlert: 0 2px 1px $cShadow !default;
+
+/* Ico area */
+$cIco: $cDark !default;
+$taIco: center !default;
+$pIco: 1.25rem 1rem !default;
+$fzIco: 2.5rem !default;
+
+/* Info title */
+$ttInfoTitle: uppercase !default;
+$ffInfoTitle: 'Quicksand', sans-serif !default;
+$fzInfoTitle: 1.5rem !default;
+$pInfoTitle: 1.25rem 1rem 0 1rem !default;
+$mInfoTitle: inherit !default;
+
+/* Info text */
+$fsInfoText: italic !default;
+$pInfoText: 0 1rem 1rem 1rem !default;
+$mInfoText: 0 !default;
+$cInfoText: lighten($cIco, $amountDarken) !default;
+
+/* Alert style */
+$cSuccess: #28A745 !default;
+$cInfo: #007BFF !default;
+$cWarning: #FFC107 !default;
+$cError: #DC3545 !default;

@@ -3,17 +3,13 @@
  * @author: SMITH Emmanuel
  * @version: 2.0.0
  */
-@import "../../node_modules/bourbon/core/bourbon";
-
-
-$cIco: #343A40;
-$cShadow: #F0F0F0;
-$cShadowDark: transparentize(#000, .9);
-$cAlert: rgba(0, 0, 0, 0.03);
 
 $cSuccess: #2DBDA8;
 $cInfo: #2C97DE;
 $cWarning: #EFC663;
 $cError: #CC3E4A;
 
-$amountDarken: 0.5;
+@import "../core-variables";
+
+$bAlert: 1px solid darken($cAlert, 3%);
+$bgAlert: $cAlert;

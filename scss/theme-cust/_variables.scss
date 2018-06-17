@@ -4,11 +4,8 @@
  * @version: 2.0.0
  */
 
-$cIco: #343A40;
-$cWhite: #F0F0F0;
-$cShadow: $cWhite;
-$cShadowDark: transparentize(#000, .8);
-$cAlert: rgba(0, 0, 0, 0.03);
+$bsAlert: none;
+$mInfoTitle: 0;
 
 $cSuccessDark: #05974A;
 $cSuccessLight: #F2E51E;
@@ -19,4 +16,7 @@ $cWarningLight: #D8E015;
 $cErrorDark: #D20B54;
 $cErrorLight: #FFB849;
 
-$amountDarken: 0.5;
+@import "../core-variables";
+
+/* Alert */
+$bAlert: 1px solid $cShadow;

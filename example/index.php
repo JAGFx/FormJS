@@ -212,11 +212,11 @@
 							</a >
 							<a class="btn btn-sm p-0 pr-2 btn-npm" href="https://www.npmjs.com/package/jagfx-formjs" target="_blank" title="NPM repository page" >
 								<i class="fab fa-npm p-2 mr-1" ></i >
-								JAGFx
+								jagfx-formjs
 							</a >
 							<a class="btn btn-sm p-0 pr-2 btn-git" href="https://github.com/JAGFx" target="_blank" title="Github repository" >
 								<i class="fab fa-github p-2 mr-1" ></i >
-								jagfx-formjs
+								JAGFx
 							</a >
 						</div >
 					</div >

@@ -4,112 +4,102 @@
  * @version: 2.0.0
  */
 
-
-.formJS-loading {
-	margin-left: .5rem; }
-
+/* Shadow */
+/* ALert */
+/* Ico area */
+/* Info title */
+/* Info text */
+/* Alert style */
+/* Shadow */
+/* ALert */
+/* Ico area */
+/* Info title */
+/* Info text */
+/* Alert style */
 @media (max-width: 768px) {
-	.formJS .alert {
-		flex-direction: column; }
-}
+  .formJS .alert {
+    flex-direction: column; } }
 
 @media (min-width: 768px) {
-	.formJS .alert {
-		flex-direction: row; }
+  .formJS .alert {
+    flex-direction: row; } }
 
-
-	.formJS .alert .ico {
-		min-width: 5rem; }
-}
+.formJS-loading {
+  margin-left: .5rem; }
 
 .formJS .alert {
-	background:  none;
-	border:      none;
-	display:     flex;
-	padding:     0;
-	align-items: stretch;
-	box-shadow:  0 2px 1px #F0F0F0; }
+  background: none;
+  display: flex;
+  padding: 0;
+  align-items: stretch;
+  border: none;
+  overflow: hidden;
+  -webkit-box-shadow: 0 2px 1px #F0F0F0;
+  -moz-box-shadow: 0 2px 1px #F0F0F0;
+  box-shadow: 0 2px 1px #F0F0F0; }
+  .formJS .alert .ico {
+    text-align: center;
+    padding: 1.25rem 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center; }
+    .formJS .alert .ico > * {
+      font-size: 2.5rem; }
+  .formJS .alert .info {
+    width: 100%; }
+    .formJS .alert .info > h4 {
+      text-transform: uppercase;
+      font-family: "Quicksand", sans-serif;
+      padding: 1.25rem 1rem 0 1rem;
+      font-size: 1.5rem;
+      margin: inherit; }
+    .formJS .alert .info > p {
+      font-style: italic;
+      padding: 0 1rem 1rem 1rem;
+      margin: 0;
+      color: #353b41; }
 
-
-.formJS .alert .ico {
-	text-align:      center;
-	padding:         1.25rem 1rem;
-	display:         flex;
-	flex-direction:  row;
-	align-items:     center;
-	justify-content: center; }
-
-
-.formJS .alert .ico > * {
-	font-size: 2.5rem; }
-
-
-.formJS .alert .info {
-	width: 100%; }
-
-
-.formJS .alert .info > h4 {
-	text-transform: uppercase;
-	/* TODO Add common font */
-	font-family:    'Quicksand', sans-serif;
-	padding:        1.25rem 1rem 0 1rem;
-	font-size:      1.5em; }
-
-
-.formJS .alert .info > p {
-	font-style: italic;
-	padding:    0 1rem 1rem 1rem;
-	margin:     0;
-	color:      #353B41; }
-
+@media (min-width: 768px) {
+  .formJS .alert .ico {
+    min-width: 5rem; } }
 
 .formJS .alert.formjs-success .ico {
-	background: rgba(40, 167, 69, 0.5);
-	color:      #155925; }
-
+  background: rgba(40, 167, 69, 0.5);
+  color: #155925; }
 
 .formJS .alert.formjs-success .info {
-	background: #D4F5DC; }
-
+  background: #d4f5dc; }
 
 .formJS .alert.formjs-success .info > h4 {
-	color: #155925; }
-
+  color: #155925; }
 
 .formJS .alert.formjs-info .ico {
-	background: rgba(0, 123, 255, 0.5);
-	color:      #004C9E; }
-
+  background: rgba(0, 123, 255, 0.5);
+  color: #004c9e; }
 
 .formJS .alert.formjs-info .info {
-	background: #CCE5FF; }
-
+  background: #cce5ff; }
 
 .formJS .alert.formjs-info .info > h4 {
-	color: #004C9E; }
-
+  color: #004c9e; }
 
 .formJS .alert.formjs-warning .ico {
-	background: rgba(255, 193, 7, 0.5);
-	color:      #876500; }
-
+  background: rgba(255, 193, 7, 0.5);
+  color: #876500; }
 
 .formJS .alert.formjs-warning .info {
-	background: #FFF4D3; }
-
+  background: #fff4d3; }
 
 .formJS .alert.formjs-warning .info > h4 {
-	color: #876500; }
-
+  color: #876500; }
 
 .formJS .alert.formjs-error .ico {
-	background: rgba(220, 53, 69, 0.5);
-	color:      #7C151F; }
-
+  background: rgba(220, 53, 69, 0.5);
+  color: #7c151f; }
 
 .formJS .alert.formjs-error .info {
-	background: #F9DFE1; }
-
+  background: #f9dfe1; }
 
 .formJS .alert.formjs-error .info > h4 {
-	color: #7C151F; }
+  color: #7c151f; }

@@ -1,0 +1,64 @@
+/*!
+ * Copyright (c) 2018.  JAGFx
+ * @author: SMITH Emmanuel
+ * @version: 2.0.0
+ */
+@import "core-variables";
+
+
+@media (max-width: 768px) {
+	.formJS .alert { flex-direction: column; }
+}
+
+
+@media (min-width: 768px) {
+	.formJS .alert { flex-direction: row; }
+}
+
+
+.formJS-loading { margin-left: .5rem; }
+
+
+.formJS {
+	
+	.alert {
+		background:  $bgAlert;
+		display:     flex;
+		padding:     $pAlert;
+		align-items: stretch;
+		border:      $bAlert;
+		overflow:    hidden;
+		@include prefixer(box-shadow, $bsAlert, ("webkit", "moz"));
+		
+		.ico {
+			text-align:      $taIco;
+			padding:         $pIco;
+			display:         flex;
+			flex-direction:  row;
+			align-items:     center;
+			justify-content: center;
+			
+			> * {
+				font-size: $fzIco;
+			}
+		}
+		
+		.info {
+			width: 100%;
+			> h4 {
+				text-transform: $ttInfoTitle;
+				font-family:    $ffInfoTitle;
+				padding:        $pInfoTitle;
+				font-size:      $fzInfoTitle;
+				margin:         $mInfoTitle;
+			}
+			
+			> p {
+				font-style: $fsInfoText;
+				padding:    $pInfoText;
+				margin:     $mInfoText;
+				color:      $cInfoText;
+			}
+		}
+	}
+}
