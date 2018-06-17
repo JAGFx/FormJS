@@ -177,6 +177,48 @@ $( '#yourForm' ).formJS( {
 } );
 ````
 
+#### Full default settings
+````javascript
+var settings  = {
+	alerts:      {
+		unexpected: {
+			title:   'Error',
+			message: 'Unexpected error occurred'
+		},
+		failSend:   {
+			title:   'Error',
+			message: 'Unable to send data'
+		}
+	},
+	keys:        {
+		success: 'success',
+		info:    'info',
+		warning: 'warning',
+		error:   'error'
+	},
+	icons:       {
+		loading: '<span class="fas fa-circle-notch fa-spin"></span>',
+		success: '<span class="fas fa-check"></span>',
+		info:    '<span class="fas fa-info"></span>',
+		warning: '<span class="fas fa-exclamation-triangle"></span>',
+		error:   '<span class="fas fa-fire"></span>'
+	},
+	form:        {
+		ajaxSettings:   {
+			contentType: false
+		},
+		alertContainer: '.formJS',
+		btnSubmit:      '.btn[type="submit"]'
+	},
+	redirection: {
+		message: 'Automatic redirection in a second',
+		delay:   1100
+	},
+	callback:    function ( currentAlert ) {
+	}
+};
+````
+
 ### Custom style
 
 You have SCSS files to allow you to create custom style.
