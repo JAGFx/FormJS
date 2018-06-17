@@ -74,16 +74,16 @@
 				<title >jQuery feedback plugin - Example</title >
 				
 				<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" >
+				
+				<!-- To import -->
 				<link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free-webfonts/css/fa-solid.css" >
+				<link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free-webfonts/css/fa-brands.css" >
 				<link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" >
 				
 				<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet" >
 				
-				<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/solid.css" integrity="sha384-Rw5qeepMFvJVEZdSo1nDQD5B6wX0m7c5Z/pLNvjkB14W6Yki1hKbSEQaX9ffUbWe" crossorigin="anonymous" >
-				<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/fontawesome.css" integrity="sha384-GVa9GOgVQgOk+TNYXu7S/InPTfSDTtBalSgkgqQ7sCik56N9ztlkoTr2f/T44oKV" crossorigin="anonymous" >
-				<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/brands.css" integrity="sha384-VGCZwiSnlHXYDojsRqeMn3IVvdzTx5JEuHgqZ3bYLCLUBV8rvihHApoA1Aso2TZA" crossorigin="anonymous" >
-				
 				<link rel="stylesheet" href="../dist/css/theme-flat/formJS-flat.css" id="styleAlert" >
+				<!-- ./ To import -->
 				
 				<style >
 					body { background: #f7f7f7; }

@@ -29,15 +29,18 @@
   margin-left: .5rem; }
 
 .formJS .alert {
-  background: none;
-  display: flex;
-  padding: 0;
-  align-items: stretch;
-  border: 1px solid #F0F0F0;
-  overflow: hidden;
-  -webkit-box-shadow: none;
-  -moz-box-shadow: none;
-  box-shadow: none; }
+  background:                  none;
+  display:                     flex;
+  padding:                     0;
+  align-items:                 stretch;
+  border:                      1px solid #F0F0F0;
+  overflow:                    hidden;
+  -webkit-box-shadow:          none;
+  -moz-box-shadow:             none;
+	box-shadow:            none;
+	-webkit-border-radius: 5px;
+	-moz-border-radius:    5px;
+	border-radius:         5px; }
   .formJS .alert .ico {
     text-align: center;
     padding: 1.25rem 1rem;

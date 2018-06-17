@@ -18,6 +18,7 @@ $cShadowDark: transparentize($cDark, .9) !default;
 $cAlert: rgba($cDark, 0.03) !default;
 $bgAlert: none !default;
 $bAlert: none !default;
+$brAlert: 5px !default;
 $pAlert: 0 !default;
 $bsAlert: 0 2px 1px $cShadow !default;
 

@@ -29,6 +29,7 @@
 		border:      $bAlert;
 		overflow:    hidden;
 		@include prefixer(box-shadow, $bsAlert, ("webkit", "moz"));
+		@include prefixer(border-radius, $brAlert, ("webkit", "moz"));
 		
 		.ico {
 			text-align:      $taIco;
