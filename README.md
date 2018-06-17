@@ -64,13 +64,13 @@ jQuery plugin to give feedback to user with ajax request
 </html >
 ````
 
-> Note: By default, the font used is "Quicksand Regular". If you want to change it, see style customisation section
+> Note: By default, the font used is "Quicksand Regular". If you want to change it, you can override or create a custom style
 
 ### Custom settings
 
 #### Alert message
 
-If you want to customise the default error message (Unexpected by example), see below
+You can customise the default error message (Unexpected by example)
 
 ````javascript
 $( '#yourForm' ).formJS( {
@@ -108,7 +108,7 @@ $( '#yourForm' ).formJS( {
 
 By default, i use [Fontawesome regular](https://fontawesome.com/) icons pack. 
 
-You can change and set html icon as you want and use icons pack you want:
+You can change it, set html icon as you want and use icons pack as you want:
 
 * `<i></i> balise`
 * `<span></span> balise`
@@ -154,7 +154,7 @@ $( '#yourForm' ).formJS( {
 
 You can redirect user after ajax request. A message will be added after error title.
 
-If you want so change this message and delay before redirect see below
+You can change this message and delay before the redirection
 
 ````javascript
 $( '#yourForm' ).formJS( {
@@ -181,7 +181,7 @@ $( '#yourForm' ).formJS( {
 
 You have SCSS files to allow you to create custom style.
 
-In `formJSFolder/scss/`, you can find `_core*.scss` files. Include it in your custom style to have the base structure of alert.
+In `formJSFolder/scss/`, you can find `_core*.scss` files. Use it as base structure of your custom style.
 Create a folder named with theme name and add two file:
 
 * `_variables.scss`: Contain YOUR theme variable. It use to override core variables  
