@@ -23,7 +23,7 @@
 				success: 'success',
 				info:    'info',
 				warning: 'warning',
-				error:   'danger'
+				error:   'error'
 			},
 			icons:       {
 				loading: '<span class="fas fa-circle-notch fa-spin"></span>',
@@ -43,7 +43,7 @@
 				delay:   1100
 			},
 			btnSubmit:   '.btn[type="submit"]',
-			callback:    function () {
+			callback:    function ( currentAlert ) {
 			}
 		}, options );
 
@@ -54,83 +54,86 @@
 			var btnSubmit    = $this.find( settings.btnSubmit );
 			var currentAlert = $.extend( settings.alerts.unexpected, { type: 'error' } );
 			var ajaxPending  = false;
+			var ajaxSettings;
 			var formdata;
 			var data;
-			var ajaxSettings;
 
 			$this.submit( function ( e ) {
 				e.preventDefault();
 
+				// --------------- Check if an ajax request is in precessing
 				if ( ajaxPending === false )
 					ajaxPending = true;
-
 				else return;
 
 				try {
+					// --------------- Check if a submit button is found
 					if ( btnSubmit.length === 0 )
 						throw 'Unable to find submit button';
 
+					// --------------- Check if form method is found
+					if ( method == "" || method === null )
+						throw 'Undefined method of form';
+
+					// --------------- Add loader and disabled submit button
 					btnSubmit
 						.append( $( settings.icons.loading ).addClass( 'formJS-loading' ) )
 						.attr( 'disabled' );
 
 					btnSubmit.addClass( 'disabled' );
 
-					if ( method == "" || method == null ) {
-						throw 'Undefined method of form';
+					// --------------- Prepare ajax setting
+					formdata     = (window.FormData) ? new FormData( $this[ 0 ] ) : null;
+					data         = (formdata !== null) ? formdata : $this.serialize();
+					ajaxSettings = $.extend( settings.form.ajaxSettings, {
+						url:         action,
+						type:        method,
+						data:        data,
+						processData: false
+					} );
 
-					} else {
-						formdata     = (window.FormData) ? new FormData( $this[ 0 ] ) : null;
-						data         = (formdata !== null) ? formdata : $this.serialize();
-						ajaxSettings = $.extend( settings.form.ajaxSettings, {
-							url:         action,
-							type:        method,
-							data:        data,
-							processData: false
+					// --------------- Send ajax request
+					$.ajax( ajaxSettings )
+						.done( function ( feedback ) {
+							try {
+								// --------------- If no feedback found, write unexpected alert
+								if ( feedback.length === 0 )
+									throw 'No data found on response';
+
+								var feedbackData = $.parseJSON( feedback );
+								var notif        = '';
+
+								// --------------- Check feedback structure
+								$this.checkFeedbackStructure( feedbackData );
+
+								// --------------- If url field is in feedback,  prepare to redirect to it
+								if ( feedbackData.type === settings.keys.success && feedbackData.hasOwnProperty( 'url' ) ) {
+									notif = ' - ' + settings.redirection.message;
+
+									setTimeout( function () {
+										window.location.replace( feedbackData.url );
+									}, settings.redirection.delay );
+								}
+
+								// --------------- Make alert object with feedback
+								currentAlert.type    = feedbackData.type;
+								currentAlert.title   = feedbackData.data.title;
+								currentAlert.message = feedbackData.data.message + notif;
+
+							} catch ( error ) {
+								console.error( '[FormJS] ' + error );
+							}
+						} )
+						.fail( function ( error ) {
+							console.error( error );
+						} )
+						.always( function () {
+							// --------------- Call after all ajax request
+							$this.writeAlert();
 						} );
 
-						$.ajax( ajaxSettings )
-							.done( function ( feedback ) {
-								try {
-									// If no feedback found, write unexpected alert
-									if ( feedback.length === 0 ) {
-										throw 'No data found on response'
-									}
-
-									var feedbackData = $.parseJSON( feedback );
-									var notif        = "";
-
-									$this.checkFeedbackStructure( feedbackData );
-
-									//console.log( currentAlert );
-
-									// Redirection si type = "success" et si une Url est spécifié
-									if ( feedbackData.type === settings.keys.success && feedbackData.hasOwnProperty( 'url' ) ) {
-
-										notif = ' - ' + settings.redirection.message;
-										setTimeout( function () {
-											window.location.replace( feedbackData.url );
-										}, settings.redirection.delay );
-									}
-
-									// Affichage de l'alert
-									currentAlert.type    = feedbackData.type;
-									currentAlert.title   = feedbackData.data.title;
-									currentAlert.message = feedbackData.data.message + notif;
-
-								} catch ( error ) {
-									console.error( '[FormJS] ' + error );
-								}
-							} )
-							.fail( function ( error ) {
-								console.error( error );
-							} )
-							.always( function () {
-								//console.log( currentAlert );
-								$this.writeAlert();
-							} );
-					}
 				} catch ( error ) {
+					// --------------- Call if an error thrown before sending ajax request
 					console.error( '[FormJS] ' + error );
 					$this.writeAlert();
 				}
@@ -141,14 +144,16 @@
 			 * @param inputData
 			 */
 			$this.checkFeedbackStructure = function ( inputData ) {
-				var feedbackStructure = {
-					type: '',
-					url:  '',
-					data: {
-						title:   '',
-						message: ''
-					}
-				};
+				/**
+				 * feedbackStructure = {
+						type: '',
+						url:  '',
+						data: {
+							title:   '',
+							message: ''
+						}
+					};
+				 */
 
 				if ( !inputData.hasOwnProperty( 'type' ) )
 					throw 'Invalid feedback structure: "type" missing';
@@ -170,7 +175,8 @@
 			 * Create DOM alert
 			 */
 			$this.writeAlert = function () {
-				var alert = $( '<div class="alert formjs-' + currentAlert.type + '" role="alert" />' )
+				// --------------- Create alert DOM element
+				var alert = $( '<div class="alert formjs-' + settings.keys[ currentAlert.type ] + '" role="alert" />' )
 					.html( '<div class="ico">\n\
 								' + settings.icons[ currentAlert.type ] + '\n\
 							</div>\n\
@@ -181,17 +187,19 @@
 					.hide()
 					.fadeIn( 300 );
 
+				// --------------- Add alert DOM element to the container
 				$( settings.form.alertContainer )
 					.empty()
 					.html( alert );
 
+				// --------------- Scroll top
 				$( 'html, body' ).animate( {
 					scrollTop: $( settings.form.alertContainer ).offset().top - 55
 				}, 300 );
 
+				// --------------- Enable formJS process and enabled submit button
 				var btnSubmit = $( settings.btnSubmit );
 				if ( btnSubmit !== undefined && btnSubmit.length ) {
-					//console.log(btnSender);
 					btnSubmit
 						.find( '.formJS-loading' )
 						.remove();
@@ -201,19 +209,20 @@
 					ajaxPending = false;
 				}
 
-				if ( currentAlert.type === settings.keys.success || currentAlert.type === settings.keys.info )
+				// --------------- Print alert into developper console
+				if ( currentAlert.type === 'success' || currentAlert.type === 'info' )
 					console.log( currentAlert.title + " - " + currentAlert.message );
 
-				else if ( currentAlert.type === settings.keys.error )
+				else if ( currentAlert.type === 'error' )
 					console.error( currentAlert.title + " - " + currentAlert.message );
 
-				else if ( currentAlert.type === settings.keys.warning )
+				else if ( currentAlert.type === 'warning' )
 					console.warn( currentAlert.title + " - " + currentAlert.message );
 
 				else
 					console.log( currentAlert.title + " - " + currentAlert.message );
 
-				settings.callback();
+				settings.callback( currentAlert );
 			};
 
 			/**
@@ -249,114 +258,4 @@
 		return obj;
 	};
 
-
-	$.fn.setDisplayForm = function () {
-		var disp = ($( window ).width() <= 768) ? "block" : "flex";
-		$( this ).css( "display", disp );
-
-		return this;
-	};
-
-
-	/*$( "form:not(.noForm)" ).submit( function ( e ) {
-		var $this     = $( this );
-		var action    = $this.attr( "action" );
-		var method    = $this.attr( "method" );
-		var callback  = $this.data( 'callback' );
-		var btnSubmit = $this.find( ".btn[type=\"submit\"]" );
-		var formdata;
-		var data;
-		var alert     = {
-			type:  "danger",
-			titre: "Erreur",
-			msg:   "Une erreur inconnue s'est produite."
-		};
-
-		//console.log(e.currentTarget);
-
-		if ( $this.attr( "data-preventDefault" ) !== "yes" )
-			return e;
-		else {
-			e.preventDefault();
-
-			btnSubmit
-				.html( btnSubmit.html() + ' <span class="fa fa-circle-o-notch fa-spin"></span>' )
-				.attr( "disabled" );
-			//console.log(btnSubmit.html());
-
-			//console.log($this.serialize());
-			if ( method == "" || method == null ) {
-				alert.type  = "error";
-				alert.titre = "Erreur fatale";
-				alert.msg   = "Formulaire - Méthode non spécifié";
-				writeAlert( $this, alert, btnSubmit );
-			}
-			else {
-
-				formdata = (window.FormData) ? new FormData( $this[ 0 ] ) : null;
-				data     = (formdata !== null) ? formdata : $this.serialize();
-
-				$.ajax( {
-					url:         action,
-					type:        method,
-					data:        data,
-					contentType: false,
-					processData: false,
-					success:     function ( retour ) {
-						//console.log(retour);
-						if ( retour == '' ) {
-							writeAlert( $this, alert, btnSubmit );
-							return;
-						}
-
-						var dataRetour = $.parseJSON( retour );
-						var notif      = "";
-						//console.log(dataRetour);
-
-						// Le Type doit strictement être parmis "success", "warning" et "danger"
-						if ( dataRetour.Type === "success"
-							|| dataRetour.Type === "warning"
-							|| dataRetour.Type === "danger"
-							|| dataRetour.Type === "info" ) {
-
-							// Redirection si Type = "success" et si une Url est spécifié
-							if ( dataRetour.Type === "success"
-								&& dataRetour.Url != null ) {
-
-								notif = " - Redirection automatique dans une seconde";
-								setTimeout( function () {
-									window.location.replace( dataRetour.Url );
-								}, 1100 );
-							}
-
-							// Affichage de l'alert
-							alert.type  = dataRetour.Type;
-							alert.titre = dataRetour.Data.Titre;
-							alert.msg   = dataRetour.Data.Message + notif;
-							writeAlert( $this, alert, btnSubmit, callback );
-							return;
-
-						} else {
-							writeAlert( $this, alert, btnSubmit );
-							return;
-						}
-					},
-					error:       function ( data, status, error ) {
-						//console.log(data.status);
-						//console.log(status + " -- " + error);
-
-						alert.type  = "error";
-						alert.titre = "Erreur: " + error;
-						alert.msg   = "Impossible d'envoyer les données.";
-						writeAlert( $this, alert, btnSubmit );
-						return;
-					}
-				} );
-			}
-		}
-	} );*/
 })( jQuery );
-
-$( window ).resize( function () {
-	$( "form .messageForm .alert" ).setDisplayForm();
-} );
