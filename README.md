@@ -43,6 +43,8 @@ jQuery plugin to give feedback to user with ajax request
 
 ### Quick use
 
+#### Minimal code
+
 ````html
 <!DOCTYPE html>
 <html lang="en" >
@@ -59,12 +61,34 @@ jQuery plugin to give feedback to user with ajax request
 		<link rel="stylesheet" href="node_modules/jagfx-formjs/dist/css/theme-flat/formJS-flat.css" id="styleAlert" >
 	</head >
 	<body >
+		<form id="yourForm" method="post" >
+			<button class="btn" type="submit">Submit</button>
+		</form>
 		
+		<script >
+			$( '#youForm' ).formJS();
+		</script>
 	</body >
 </html >
 ````
 
 > Note: By default, the font used is "Quicksand Regular". If you want to change it, you can override or create a custom style
+
+#### Response structure
+
+The response MUST be in JSON and match with this structure
+
+````json
+{
+	"type": 	"success",
+	"url": 		"yourUrl (optionally entry)",
+	"data" : 	{
+		"title": 	"yourTitle",
+		"message": 	"yourMessage"
+	}
+}
+````
+
 
 ### Custom settings
 
