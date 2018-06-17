@@ -36,13 +36,13 @@
 				ajaxSettings:   {
 					contentType: false
 				},
-				alertContainer: '.formJS'
+				alertContainer: '.formJS',
+				btnSubmit:      '.btn[type="submit"]'
 			},
 			redirection: {
 				message: 'Automatic redirection in a second',
 				delay:   1100
 			},
-			btnSubmit:   '.btn[type="submit"]',
 			callback:    function ( currentAlert ) {
 			}
 		}, options );
@@ -51,7 +51,7 @@
 			var $this        = $( this );
 			var action       = $this.attr( "action" );
 			var method       = $this.attr( "method" );
-			var btnSubmit    = $this.find( settings.btnSubmit );
+			var btnSubmit    = $this.find( settings.form.btnSubmit );
 			var currentAlert = $.extend( settings.alerts.unexpected, { type: 'error' } );
 			var ajaxPending  = false;
 			var ajaxSettings;
@@ -198,7 +198,7 @@
 				}, 300 );
 
 				// --------------- Enable formJS process and enabled submit button
-				var btnSubmit = $( settings.btnSubmit );
+				var btnSubmit = $( settings.form.btnSubmit );
 				if ( btnSubmit !== undefined && btnSubmit.length ) {
 					btnSubmit
 						.find( '.formJS-loading' )
