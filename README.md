@@ -89,6 +89,15 @@ The response MUST be in JSON and match with this structure
 }
 ````
 
+#### Themes
+
+You have 3 theme available for the alert:
+
+* Bootstrap 3/4 ( `theme-bs.css` )
+* Custom ( `theme-cust.css` )
+* Flat ( `theme-flat.css` )
+
+You can choose it by including corresponding CSS
 
 ### Custom settings
 
