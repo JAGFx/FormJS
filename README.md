@@ -40,7 +40,186 @@ jQuery plugin to give feedback to user with ajax request
 
 
 ## Usage
-Usage instructions go here
+
+### Quick use
+
+````html
+<!DOCTYPE html>
+<html lang="en" >
+	<head >
+		<meta charset="UTF-8" >
+		<title >FormJS</title >
+		
+		<link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free-webfonts/css/fa-solid.css" >
+		<link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free-webfonts/css/fa-brands.css" >
+		<link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" >
+		
+		<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet" >
+		
+		<link rel="stylesheet" href="node_modules/jagfx-formjs/dist/css/theme-flat/formJS-flat.css" id="styleAlert" >
+	</head >
+	<body >
+		
+	</body >
+</html >
+````
+
+> Note: By default, the font used is "Quicksand Regular". If you want to change it, see style customisation section
+
+### Custom settings
+
+#### Alert message
+
+If you want to customise the default error message (Unexpected by example), see below
+
+````javascript
+$( '#yourForm' ).formJS( {
+	alerts: {
+		unexpected: {
+			title:   'Custom unexpected error title',
+			message: 'Custom unexpected error message'
+		},
+		failSend:   {
+			title:   'Custom fail send data error title',
+			message: 'Custom fail send data error message'
+		}
+	}
+} );
+````
+
+#### Keys
+
+The keys are suffix added after 'formjs' class into `alertContainer`. It use for style customisation.
+
+> Note: If you change it, you MUST rebuild style with SCSS builder
+
+````javascript
+$( '#yourForm' ).formJS( {
+	keys: {
+		success: 'success-custom',
+		info:    'info-custom',
+		warning: 'warning-custom',
+		error:   'error-custom'
+	}
+} );
+````
+
+#### Icons
+
+By default, i use [Fontawesome regular](https://fontawesome.com/) icons pack. 
+
+You can change and set html icon as you want and use icons pack you want:
+
+* `<i></i> balise`
+* `<span></span> balise`
+* `<img /> balise`
+* Text also
+
+````javascript
+$( '#yourForm' ).formJS( {
+	icons: {
+		loading: '<span class="fas fa-circle-notch fa-spin"></span>',
+		success: '<i class="fas fa-check-square"></i>',
+		info:    '<span class="ti-info"></span>',
+		warning: '<img src="myIcon.svg" />',
+		error:   'ERR'
+	}
+} );
+````
+
+#### Form
+
+If you have custom header request, you can pass into this setting. The `url`, `method` and `data` can't be modified
+
+Also, you can change de formJS container and submit button identifier.
+
+> Note: If you change container, you MUST rebuild style with correct container.
+
+````javascript
+$( '#yourForm' ).formJS( {
+	form: {
+		ajaxSettings:   {
+			async: 		false,
+			beforeSend: function (xhr){ 
+				xhr.setRequestHeader('Authorization', make_base_auth(username, password)); 
+			}
+		},
+		alertContainer: '.customContainer',
+		btnSubmit:      '.myCustomBtnID'
+	}
+} );
+````
+
+#### Redirection
+
+You can redirect user after ajax request. A message will be added after error title.
+
+If you want so change this message and delay before redirect see below
+
+````javascript
+$( '#yourForm' ).formJS( {
+	redirection: {
+		message: 'Custom redirect message',
+		delay:   2500
+	}
+} );
+````
+
+#### Callback
+
+At the end of precess, a callback are called. You can set. The current alert is passed to function parameter
+
+````javascript
+$( '#yourForm' ).formJS( {
+	callback: function ( currentAlert ) {
+		// Do something with currentAlert
+	}
+} );
+````
+
+### Custom style
+
+You have SCSS files to allow you to create custom style.
+
+In `formJSFolder/scss/`, you can find `_core*.scss` files. Include it in your custom style to have the base structure of alert.
+Create a folder named with theme name and add two file:
+
+* `_variables.scss`: Contain YOUR theme variable. It use to override core variables  
+* `your-theme-name.scss`: Contain all customisation for type of alert: `Success`, `Info`, `Warning` and `Error`. Use preset from on of existing template
+
+At the end of customisation, run  `npm run scss:dist` to generate your style css file and minified too.
+
+### NPM commands
+
+Remove old css files
+````bash
+$ npm run scss:clean
+````
+
+Generate css files
+````bash
+$ npm run scss:build
+````
+
+Launch scss watcher to generate css file at change
+````bash
+$ npm run scss:watch
+````
+
+Generate css dist files
+````bash
+$ npm run css:dist
+````
+
+Generate js dist files
+````bash
+$ npm run js:dist
+````
+
+Generate css and js dist files
+````bash
+$ npm run gulp:default
+````
 
 <!-- LICENSE/ -->
 

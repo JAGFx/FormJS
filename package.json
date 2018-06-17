@@ -3,10 +3,13 @@
  "version": "2.0.0-alpha",
  "description": "jQuery plugin to give feedback to user with ajax request",
  "scripts": {
-  "scss:build": "node-sass --output-style compressed -r -o dist/css --source-map-contents scss",
-  "scss:build-dev": "node-sass --output-style expanded scss/formJS.scss > dist/formJS.css",
-  "scss:watch": " node-sass -w -r -o dist/css --source-map-contents scss",
-  "test": "echo \"Error: no test specified\" && exit 1"
+  "scss:clean":   "gulp scss:clean",
+  "scss:build":   "gulp scss:build",
+  "scss:watch":   "gulp scss:watch",
+  "css:dist":     "gulp css:dist",
+  "js.dist":      "gulp js:dist",
+  "gulp.default": "gulp default",
+  "test":         "echo \"Error: no test specified\" && exit 1"
  },
  "repository": {
   "type": "git",
