@@ -28,14 +28,14 @@
   margin-left: .5rem; }
 
 .formJS .alert {
-  background:                  none;
-  display:                     flex;
-  padding:                     0;
-  align-items:                 stretch;
-  border:                      none;
-  overflow:                    hidden;
-  -webkit-box-shadow:          0 2px 1px #F0F0F0;
-  -moz-box-shadow:             0 2px 1px #F0F0F0;
+	background:            none;
+	display:               flex;
+	padding:               0;
+	align-items:           stretch;
+	border:                none;
+	overflow:              hidden;
+	-webkit-box-shadow:    0 2px 1px #F0F0F0;
+	-moz-box-shadow:       0 2px 1px #F0F0F0;
 	box-shadow:            0 2px 1px #F0F0F0;
 	-webkit-border-radius: 5px;
 	-moz-border-radius:    5px;
@@ -53,7 +53,6 @@
     width: 100%; }
     .formJS .alert .info > h4 {
       text-transform: uppercase;
-      font-family: "Quicksand", sans-serif;
       padding: 1.25rem 1rem 0 1rem;
       font-size: 1.5rem;
       margin: inherit; }
