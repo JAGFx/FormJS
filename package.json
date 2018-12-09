@@ -1,8 +1,8 @@
 {
- "name": "jagfx-formjs",
- "version": "2.0.0-alpha2",
+ "name":        "jagfx-formjs",
+	"version":  "2.0.0",
  "description": "jQuery plugin to give feedback to user with ajax request",
- "scripts": {
+ "scripts":     {
   "scss:clean": "gulp scss:clean",
   "scss:build": "gulp scss:build",
   "scss:watch": "gulp scss:watch",
@@ -11,11 +11,11 @@
   "gulp.default": "gulp default",
   "test": "echo \"Error: no test specified\" && exit 1"
  },
- "repository": {
+ "repository":  {
   "type": "git",
   "url": "https://github.com/JAGFx/FormJS.git"
  },
- "keywords": [
+ "keywords":    [
   "feedback",
   "javascript",
   "jquery",
