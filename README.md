@@ -56,8 +56,6 @@ jQuery plugin to give feedback to user with ajax request
 		<link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free-webfonts/css/fa-brands.css" >
 		<link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" >
 		
-		<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet" >
-		
 		<link rel="stylesheet" href="node_modules/jagfx-formjs/dist/css/theme-flat/formJS-flat.css" id="styleAlert" >
 	</head >
 	<body >
