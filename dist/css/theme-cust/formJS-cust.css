@@ -1,9 +1,18 @@
-/*
+/*!
  * Copyright (c) 2018.  JAGFx
  * @author: SMITH Emmanuel
  * @version: 2.0.0
  */
-
+/*!
+ * Copyright (c) 2018.  JAGFx
+ * @author: SMITH Emmanuel
+ * @version: 2.0.0
+ */
+/*!
+ * Copyright (c) 2018.  JAGFx
+ * @author: SMITH Emmanuel
+ * @version: 2.0.0
+ */
 /* Shadow */
 /* ALert */
 /* Ico area */
@@ -11,6 +20,16 @@
 /* Info text */
 /* Alert style */
 /* Alert */
+/*!
+ * Copyright (c) 2018.  JAGFx
+ * @author: SMITH Emmanuel
+ * @version: 2.0.0
+ */
+/*!
+ * Copyright (c) 2018.  JAGFx
+ * @author: SMITH Emmanuel
+ * @version: 2.0.0
+ */
 /* Shadow */
 /* ALert */
 /* Ico area */
@@ -29,18 +48,18 @@
   margin-left: .5rem; }
 
 .formJS .alert {
-	background:            none;
-	display:               flex;
-	padding:               0;
-	align-items:           stretch;
-	border:                1px solid #F0F0F0;
-	overflow:              hidden;
-	-webkit-box-shadow:    none;
-	-moz-box-shadow:       none;
-	box-shadow:            none;
-	-webkit-border-radius: 5px;
-	-moz-border-radius:    5px;
-	border-radius:         5px; }
+  background: none;
+  display: flex;
+  padding: 0;
+  align-items: stretch;
+  border: 1px solid #F0F0F0;
+  overflow: hidden;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px; }
   .formJS .alert .ico {
     text-align: center;
     padding: 1.25rem 1rem;

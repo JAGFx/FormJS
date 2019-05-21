@@ -26,11 +26,11 @@
 				error:   'error'
 			},
 			icons:       {
-				loading: '<span class="fas fa-circle-notch fa-spin"></span>',
-				success: '<span class="fas fa-check"></span>',
-				info:    '<span class="fas fa-info"></span>',
-				warning: '<span class="fas fa-exclamation-triangle"></span>',
-				error:   '<span class="fas fa-fire"></span>'
+				loading: '<span>&#8987;</span>',
+				success: '<span>&#10003;</span>',
+				info:    '<span>&#128712;</span>',
+				warning: '<span>&#65111;</span>',
+				error:   '<span>&#10799;</span>'
 			},
 			form:        {
 				ajaxSettings:   {
