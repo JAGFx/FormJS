@@ -74,12 +74,11 @@
 				<title >jQuery feedback plugin - Example</title >
 				
 				<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css" >
-				
-				<!-- To import -->
 				<link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free-webfonts/css/fa-solid.css" >
 				<link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free-webfonts/css/fa-brands.css" >
 				<link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" >
 				
+				<!-- To import -->
 				<link rel="stylesheet" href="../dist/css/theme-flat/formJS-flat.css" id="styleAlert" >
 				<!-- ./ To import -->
 				
@@ -225,7 +224,17 @@
 				<script src="../dist/formJS.js" ></script >
 				
 				<script >
-					$( '#formJS' ).formJS();
+					$( '#formJS' ).formJS(
+						{
+							icons: {
+								loading: '<span class="fas fa-circle-notch fa-spin"></span>',
+								success: '<span class="fas fa-check"></span>',
+								info:    '<span class="fas fa-info"></span>',
+								warning: '<span class="fas fa-exclamation-triangle"></span>',
+								error:   '<span class="fas fa-fire"></span>'
+							}
+						}
+					);
 
 					$( '.style' ).click( function ( e ) {
 						var $this = $( this );
