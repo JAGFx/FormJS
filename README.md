@@ -1,6 +1,6 @@
 <!-- TITLE/ -->
 
-<h1>Feedback jQuery plugin</h1>
+<h1>FormJS</h1>
 
 <!-- /TITLE -->
 
@@ -8,6 +8,7 @@
 <!-- BADGES/ -->
 
 <span class="badge-npmversion"><a href="https://npmjs.org/package/jagfx-formjs" title="View this project on NPM"><img src="https://img.shields.io/npm/v/jagfx-formjs.svg" alt="NPM version" /></a></span>
+<span class="badge-npmdownload"><a href="https://npmjs.org/package/jagfx-formjs" title="View download from NPM"><img src="https://img.shields.io/npm/dt/jagfx-formjs.svg" alt="NPM download" /></a></span>
 <span class="badge-daviddm"><a href="https://david-dm.org/JAGFx/FormJS" title="View the status of this project's dependencies on DavidDM"><img src="https://img.shields.io/david/JAGFx/FormJS.svg" alt="Dependency Status" /></a></span>
 <span class="badge-daviddmdev"><a href="https://david-dm.org/JAGFx/FormJS#info=devDependencies" title="View the status of this project's development dependencies on DavidDM"><img src="https://img.shields.io/david/dev/JAGFx/FormJS.svg" alt="Dev Dependency Status" /></a></span>
 <span class="badge-badge"><a href="https://scrutinizer-ci.com/g/JAGFx/FormJS/build-status/master" title="Build Status"><img src="https://scrutinizer-ci.com/g/JAGFx/FormJS/badges/build.png?b=master" alt="Build Status" /></a></span>
@@ -18,15 +19,11 @@
 
 <!-- DESCRIPTION/ -->
 
-jQuery plugin to give feedback to user with ajax request
+jQuery plugin to send a html form over ajax request with feedback system
 
 <!-- /DESCRIPTION -->
 
 ### [DEMO](http://labs.jagfx.fr/formJS/example/)
-
-## Fonts
-
-* [Quicksand regular](https://fonts.google.com/specimen/Quicksand?selection.family=Quicksand)
 
 <!-- INSTALL/ -->
 
@@ -34,7 +31,7 @@ jQuery plugin to give feedback to user with ajax request
 
 <a href="https://npmjs.com" title="npm is a package manager for javascript"><h3>NPM</h3></a><ul>
 <li>Install: <code>npm install --save jagfx-formjs</code></li>
-<li>Module: <code>require('jagfx-formjs')</code></li></ul>
+<!-- <li>Module: <code>require('jagfx-formjs')</code></li></ul> -->
 
 <!-- /INSTALL -->
 
@@ -52,10 +49,6 @@ jQuery plugin to give feedback to user with ajax request
 		<meta charset="UTF-8" >
 		<title >FormJS</title >
 		
-		<link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free-webfonts/css/fa-solid.css" >
-		<link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free-webfonts/css/fa-brands.css" >
-		<link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" >
-		
 		<link rel="stylesheet" href="node_modules/jagfx-formjs/dist/css/theme-flat/formJS-flat.css" id="styleAlert" >
 	</head >
 	<body >
@@ -63,14 +56,13 @@ jQuery plugin to give feedback to user with ajax request
 			<button class="btn" type="submit">Submit</button>
 		</form>
 		
+		<script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script >
 		<script >
-			$( '#youForm' ).formJS();
+			$( '#yourForm' ).formJS();
 		</script>
 	</body >
 </html >
 ````
-
-> Note: By default, the font used is "Quicksand Regular". If you want to change it, you can override or create a custom style
 
 #### Response structure
 
@@ -89,7 +81,7 @@ The response MUST be in JSON and match with this structure
 
 #### Themes
 
-You have 3 theme available for the alert:
+You have 3 themes available for the alert:
 
 * Bootstrap 3/4 ( `theme-bs.css` )
 * Custom ( `theme-cust.css` )
@@ -101,7 +93,7 @@ You can choose it by including corresponding CSS
 
 #### Alert message
 
-You can customise the default error message (Unexpected by example)
+You can customise the default error message (Unexpected for example)
 
 ````javascript
 $( '#yourForm' ).formJS( {
@@ -120,7 +112,7 @@ $( '#yourForm' ).formJS( {
 
 #### Keys
 
-The keys are suffix added after 'formjs' class into `alertContainer`. It use for style customisation.
+The keys are suffix added after 'formjs' class into `alertContainer`. Its use for style customisation.
 
 > Note: If you change it, you MUST rebuild style with SCSS builder
 
@@ -137,14 +129,12 @@ $( '#yourForm' ).formJS( {
 
 #### Icons
 
-By default, i use [Fontawesome regular](https://fontawesome.com/) icons pack. 
-
-You can change it, set html icon as you want and use icons pack as you want:
+You can change the icon, set html icon as you want and use icons pack as you want:
 
 * `<i></i> balise`
 * `<span></span> balise`
 * `<img /> balise`
-* Text also
+* Text also (You need to embrace the text with html balise)
 
 ````javascript
 $( '#yourForm' ).formJS( {
@@ -153,16 +143,16 @@ $( '#yourForm' ).formJS( {
 		success: '<i class="fas fa-check-square"></i>',
 		info:    '<span class="ti-info"></span>',
 		warning: '<img src="myIcon.svg" />',
-		error:   'ERR'
+		error:   '<span>ERR</span>'
 	}
 } );
 ````
 
 #### Form
 
-If you have custom header request, you can pass into this setting. The `url`, `method` and `data` can't be modified
+If you have a custom header request, you can pass into this setting. The `url`, `method` and `data` cannot be modified
 
-Also, you can change de formJS container and submit button identifier.
+Also, you can change the formJS container and submit button identifier.
 
 > Note: If you change container, you MUST rebuild style with correct container.
 
@@ -183,7 +173,7 @@ $( '#yourForm' ).formJS( {
 
 #### Redirection
 
-You can redirect user after ajax request. A message will be added after error title.
+You can redirect the user after an Ajax request. A message will be added after error title.
 
 You can change this message and delay before the redirection
 
@@ -198,13 +188,37 @@ $( '#yourForm' ).formJS( {
 
 #### Callback
 
-At the end of precess, a callback are called. You can set. The current alert is passed to function parameter
+At the end of precess, a callback is called. You can set. The current alert is passed to function parameter.
 
 ````javascript
 $( '#yourForm' ).formJS( {
 	callback: function ( currentAlert ) {
 		// Do something with currentAlert
 	}
+} );
+````
+
+#### Events
+
+You have some event that you can handle:
+
+| Event name | When ? |
+| --- | --- |
+| formjs:submit | At the start of submitting the form and before sending Ajax request |
+| formjs:ajax-success | On the success ajax success callback, after the parsing returned data |
+| formjs:error | When an error occurred during the submit process |
+| formjs:write-alert | When an alert is rendered on the DOM |
+
+For the `formjs:error`, you can know the origin of the error:
+
+* `AjaxSuccessCallback`: On error during the ajax success callback
+* `AjaxFailCallback`: On error during the ajax fail callback
+* `PreSubmit`: An error during the submitting process
+
+````javascript
+var $form = $( '#yourForm' ).formJS();
+$form.on( 'formjs:write-alert', function ( e, currentAlert ) {
+	// Do something with the current alert ...
 } );
 ````
 
@@ -228,11 +242,11 @@ var settings  = {
 		error:   'error'
 	},
 	icons:       {
-		loading: '<span class="fas fa-circle-notch fa-spin"></span>',
-		success: '<span class="fas fa-check"></span>',
-		info:    '<span class="fas fa-info"></span>',
-		warning: '<span class="fas fa-exclamation-triangle"></span>',
-		error:   '<span class="fas fa-fire"></span>'
+		loading: '<span>&#8987;</span>',
+		success: '<span>&#10003;</span>',
+		info:    '<span>&#128712;</span>',
+		warning: '<span>&#65111;</span>',
+		error:   '<span>&#10799;</span>'
 	},
 	form:        {
 		ajaxSettings:   {
@@ -252,13 +266,14 @@ var settings  = {
 
 ### Custom style
 
-You have SCSS files to allow you to create custom style.
+You have SCSS files to allow you to create custom styles.
 
-In `formJSFolder/scss/`, you can find `_core*.scss` files. Use it as base structure of your custom style.
-Create a folder named with theme name and add two file:
+In `formJSFolder/scss/`, you can find `_core*.scss` files. Use it as the base structure of your custom style.
 
-* `_variables.scss`: Contain YOUR theme variable. It use to override core variables  
-* `your-theme-name.scss`: Contain all customisation for type of alert: `Success`, `Info`, `Warning` and `Error`. Use preset from on of existing template
+Create a folder named with theme name and add to file:
+
+* `_variables.scss`: Contain YOUR theme variable. It uses to override core variables  
+* `your-theme-name.scss`: Contain all customisation for type of alert: `Success`, `Info`, `Warning` and `Error`. Use preset from one of existing templates
 
 At the end of customisation, run  `npm run scss:dist` to generate your style css file and minified too.
 
