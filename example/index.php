@@ -224,7 +224,7 @@
 				<script src="../dist/formJS.js" ></script >
 				
 				<script >
-					$( '#formJS' ).formJS(
+					var $form = $( '#formJS' ).formJS(
 						{
 							icons: {
 								loading: '<span class="fas fa-circle-notch fa-spin"></span>',
@@ -235,6 +235,22 @@
 							}
 						}
 					);
+					
+					$form.on( 'formjs:submit', function ( e, ajaxSetting, ajaxPending ) {
+						console.log( 'submit', ajaxSetting, ajaxPending );
+					} );
+					
+					$form.on( 'formjs:ajax-success', function ( e, feedback ) {
+						console.log( 'submit-success', feedback );
+					} );
+					
+					$form.on( 'formjs:error', function ( e, error, message, data ) {
+						console.log( 'error', error, message, data );
+					} );
+					
+					$form.on( 'formjs:write-alert', function ( e, currentAlert ) {
+						console.log( 'write-alert', currentAlert );
+					} );
 
 					$( '.style' ).click( function ( e ) {
 						var $this = $( this );

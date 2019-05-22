@@ -60,7 +60,7 @@
 
 			$this.submit( function ( e ) {
 				e.preventDefault();
-
+				
 				// --------------- Check if an ajax request is in precessing
 				if ( ajaxPending === false )
 					ajaxPending = true;
@@ -91,6 +91,8 @@
 						data:        data,
 						processData: false
 					} );
+					
+					$this.trigger( 'formjs:submit', [ ajaxSettings, ajaxPending ] );
 
 					// --------------- Send ajax request
 					$.ajax( ajaxSettings )
@@ -102,6 +104,8 @@
 
 								var feedbackData = $.parseJSON( feedback );
 								var notif        = '';
+								
+								$this.trigger( 'formjs:ajax-success', [ feedback ] );
 
 								// --------------- Check feedback structure
 								$this.checkFeedbackStructure( feedbackData );
@@ -121,11 +125,11 @@
 								currentAlert.message = feedbackData.data.message + notif;
 
 							} catch ( error ) {
-								console.error( '[FormJS] ' + error );
+								$this.logError( 'AjaxSuccessCallback', error, feedback );
 							}
 						} )
 						.fail( function ( error ) {
-							console.error( error );
+							$this.logError( 'AjaxFailCallback', error );
 						} )
 						.always( function () {
 							// --------------- Call after all ajax request
@@ -134,7 +138,7 @@
 
 				} catch ( error ) {
 					// --------------- Call if an error thrown before sending ajax request
-					console.error( '[FormJS] ' + error );
+					$this.logError( 'PreSubmit', error );
 					$this.writeAlert();
 				}
 			} );
@@ -170,11 +174,27 @@
 				if ( Object.keys( settings.keys ).indexOf( inputData.type ) === -1 )
 					throw 'Invalid feedback structure: "type" wrong. Accepted values: ' + Object.keys( settings.keys ).toString();
 			};
+			
+			/**
+			 * Log and trigger error event when error are occurred during the submit processing
+			 * @param place Where the error are occurred
+			 * @param message Error message
+			 * @param data Additional data about this error
+			 */
+			$this.logError = function ( place, message, data ) {
+				var mess = message.message || message;
+				
+				console.error( '[FormJS][' + place + '] ' + mess );
+				
+				$this.trigger( 'formjs:error', [ place, mess, data ] );
+			};
 
 			/**
 			 * Create DOM alert
 			 */
 			$this.writeAlert = function () {
+				$this.trigger( 'formjs:write-alert', [ currentAlert ] );
+				
 				// --------------- Create alert DOM element
 				var alert = $( '<div class="alert formjs-' + settings.keys[ currentAlert.type ] + '" role="alert" />' )
 					.html( '<div class="ico">\n\
