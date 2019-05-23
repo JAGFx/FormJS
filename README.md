@@ -46,17 +46,18 @@ jQuery plugin to send a html form over ajax request with feedback system
 <!DOCTYPE html>
 <html lang="en" >
 	<head >
-		<meta charset="UTF-8" >
+		<meta charset="UTF-8" />
 		<title >FormJS</title >
 		
-		<link rel="stylesheet" href="node_modules/jagfx-formjs/dist/css/theme-flat/formJS-flat.css" id="styleAlert" >
+		<link rel="stylesheet" href="node_modules/jagfx-formjs/dist/css/theme-flat/formJS-flat.css" />
 	</head >
 	<body >
 		<form id="yourForm" method="post" >
 			<button class="btn" type="submit">Submit</button>
 		</form>
 		
-		<script src="https://code.jquery.com/jquery-3.4.1.min.js" ></script >
+		<script src="node_modules/jquery/dist/jquery.min.js" ></script >
+		<script src="node_modules/jagfx-formjs/dist/formJS.min.js" ></script >
 		<script >
 			$( '#yourForm' ).formJS();
 		</script>
