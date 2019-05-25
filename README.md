@@ -203,18 +203,27 @@ $( '#yourForm' ).formJS( {
 
 You have some event that you can handle:
 
-| Event name | When ? |
-| --- | --- |
-| formjs:submit | At the start of submitting the form and before sending Ajax request |
-| formjs:ajax-success | On the success ajax success callback, after the parsing returned data |
-| formjs:error | When an error occurred during the submit process |
-| formjs:write-alert | When an alert is rendered on the DOM |
++---------------------+-----------------------------------------------------------------------------------+-----------------------------------------------------------------------+
+| Event name          | Params                                                                            | When ?                                                                |
++=====================+===================================================================================+=======================================================================+
+| formjs:submit       | - `ajaxSettings`: (JsonObject) Options pass to `$.ajax()` method                  | At the start of submitting the form and before sending Ajax request   |
+|                     | - `ajaxPending`: (Boolean) If an ajax request is in progress                      |                                                                       |
++---------------------+-----------------------------------------------------------------------------------+-----------------------------------------------------------------------+
+| formjs:ajax-success | - `feedback`: (JsonObject) Raw data returned by the successful `$.ajax()` request | On the success ajax success callback, after the parsing returned data |
++---------------------+-----------------------------------------------------------------------------------+-----------------------------------------------------------------------+
+| formjs:error        | - `place`: (String) The origin of the error                                       | When an error occurred during the submit process                      |
+|                     | - `message`: (String) The message of the error                                    |                                                                       |
+|                     | - `data`: (Mixed) The additionnal data of the error                               |                                                                       |
++---------------------+-----------------------------------------------------------------------------------+-----------------------------------------------------------------------+
+| formjs:write-alert  | - `currentAlert`: (JsonObject) The feedback data returned form the ajax request   | When an alert is rendered on the DOM                                  |
++---------------------+-----------------------------------------------------------------------------------+-----------------------------------------------------------------------+
 
 For the `formjs:error`, you can know the origin of the error:
 
-* `AjaxSuccessCallback`: On error during the ajax success callback
-* `AjaxFailCallback`: On error during the ajax fail callback
-* `PreSubmit`: An error during the submitting process
+- `AjaxSuccessCallback`: On error during the ajax success callback
+- `AjaxFailCallback`: On error during the ajax fail callback
+- `PreSubmit`: An error during the submitting process
+
 
 ````javascript
 var $form = $( '#yourForm' ).formJS();
