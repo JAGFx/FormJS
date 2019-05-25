@@ -26,7 +26,8 @@
   "bootstrap4",
   "alert",
   "bs",
-  "plugin"
+  "plugin",
+  "jquery-plugin"
  ],
  "author": "SMITH Emmanuel <contact@jagfx.fr> (http://emmanuel-smith.me)",
  "contributors": [
