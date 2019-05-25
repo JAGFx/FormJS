@@ -8,7 +8,7 @@
 	$.fn.formJS = function ( options ) {
 		var obj = this;
 
-		var settings = $.extend( {
+		var settings = $.extend( true, {
 			alerts:      {
 				unexpected: {
 					title:   'Error',
