@@ -205,15 +205,15 @@ You have some event that you can handle:
 
 | Event name          | Params                                                                            | When ?                                                                |
 | :---:				  | --- | ---|
-| formjs:submit       | `ajaxSettings`: (JsonObject) Options pass to `$.ajax()` method<br>`ajaxPending`: (Boolean) If an ajax request is in progress| At the start of submitting the form and before sending Ajax request   |
-| formjs:ajax-success | `feedback`: (JsonObject) Raw data returned by the successful `$.ajax()` request | On the success ajax success callback, after the parsing returned data |
+| formjs:submit       | `ajaxSettings`: (JsonObject) Options pass to `$.ajax()` method<br>`ajaxPending`: (Boolean) If an ajax request is in progress| At the start of submitting the form and before sending the ajax request   |
+| formjs:ajax-success | `feedback`: (JsonObject) Raw data returned by the successful `$.ajax()` request | On the success ajax callback, after the parsing returned data |
 | formjs:error        | `place`: (String) The origin of the error<br>`message`: (String) The message of the error<br>`data`: (Mixed) The additionnal data of the error | When an error occurred during the submit process                      |
-| formjs:write-alert  | `currentAlert`: (JsonObject) The feedback data returned form the ajax request   | When an alert is rendered on the DOM                                  |
+| formjs:write-alert  | `currentAlert`: (JsonObject) The feedback data returned from the ajax request   | When an alert is rendered on the DOM                                  |
 
 For the `formjs:error`, you can know the origin of the error:
 
-- `AjaxSuccessCallback`: On error during the ajax success callback
-- `AjaxFailCallback`: On error during the ajax fail callback
+- `AjaxSuccessCallback`: An error during the ajax success callback
+- `AjaxFailCallback`: An error during the ajax fail callback
 - `PreSubmit`: An error during the submitting process
 
 
@@ -251,11 +251,12 @@ var settings  = {
 		error:   '<span>&#10799;</span>'
 	},
 	form:        {
-		ajaxSettings:   {
+		ajaxSettings:     {
 			contentType: false
 		},
-		alertContainer: '.formJS',
-		btnSubmit:      '.btn[type="submit"]'
+		alertContainer:   '.formJS',
+		btnSubmit:        '.btn[type="submit"]',
+		enableWriteAlert: true
 	},
 	redirection: {
 		message: 'Automatic redirection in a second',

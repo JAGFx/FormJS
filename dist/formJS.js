@@ -33,11 +33,12 @@
 				error:   '<span>&#10799;</span>'
 			},
 			form:        {
-				ajaxSettings:   {
+				ajaxSettings:     {
 					contentType: false
 				},
-				alertContainer: '.formJS',
-				btnSubmit:      '.btn[type="submit"]'
+				alertContainer:   '.formJS',
+				btnSubmit:        '.btn[type="submit"]',
+				enableWriteAlert: true
 			},
 			redirection: {
 				message: 'Automatic redirection in a second',
@@ -195,22 +196,24 @@
 			$this.writeAlert = function () {
 				$this.trigger( 'formjs:write-alert', [ currentAlert ] );
 				
-				// --------------- Create alert DOM element
-				var alert = $( '<div class="alert formjs-' + settings.keys[ currentAlert.type ] + '" role="alert" />' )
-					.html( '<div class="ico">\n\
+				if ( settings.form.enableWriteAlert === true ) {
+					// --------------- Create alert DOM element
+					var alert = $( '<div class="alert formjs-' + settings.keys[ currentAlert.type ] + '" role="alert" />' )
+						.html( '<div class="ico">\n\
 								' + settings.icons[ currentAlert.type ] + '\n\
 							</div>\n\
 							<div class="info">\n\
 								<h4>' + currentAlert.title + '</h4>\n\
 								<p>' + currentAlert.message + '</p>\n\
 							</div>' )
-					.hide()
-					.fadeIn( 300 );
-
-				// --------------- Add alert DOM element to the container
-				$( settings.form.alertContainer )
-					.empty()
-					.html( alert );
+						.hide()
+						.fadeIn( 300 );
+					
+					// --------------- Add alert DOM element to the container
+					$( settings.form.alertContainer )
+						.empty()
+						.html( alert );
+				}
 
 				// --------------- Scroll top
 				$( 'html, body' ).animate( {
