@@ -224,6 +224,23 @@ $form.on( 'formjs:write-alert', function ( e, currentAlert ) {
 } );
 ````
 
+
+#### Trigger
+
+If you need to use this plugin from the outside of it, you can trigger some event
+
+| Event name | Params | Action |
+| :---: | --- | --- |
+| formjs:send-form | | Start the form sending processing |
+
+````javascript
+var $form = $( '#yourForm' ).formJS();
+$( '#anotherSendingButton' ).click( function () {
+	$form.trigger( 'formjs:send-form' );
+} );
+````
+
+
 #### Full default settings
 ````javascript
 var settings  = {

@@ -48,7 +48,7 @@
 			}
 		}, options );
 
-		obj.each( function () {
+		return obj.each( function () {
 			var $this        = $( this );
 			var action       = $this.attr( "action" );
 			var method       = $this.attr( "method" );
@@ -58,31 +58,35 @@
 			var ajaxSettings;
 			var formdata;
 			var data;
-
-			$this.submit( function ( e ) {
+			
+			/**
+			 * Sending data method
+			 * @param e
+			 */
+			$this.sendData = function ( e ) {
 				e.preventDefault();
 				
 				// --------------- Check if an ajax request is in precessing
 				if ( ajaxPending === false )
 					ajaxPending = true;
 				else return;
-
+				
 				try {
 					// --------------- Check if a submit button is found
 					if ( btnSubmit.length === 0 )
 						throw 'Unable to find submit button';
-
+					
 					// --------------- Check if form method is found
 					if ( method == "" || method === null )
 						throw 'Undefined method of form';
-
+					
 					// --------------- Add loader and disabled submit button
 					btnSubmit
 						.append( $( settings.icons.loading ).addClass( 'formJS-loading' ) )
 						.attr( 'disabled' );
-
+					
 					btnSubmit.addClass( 'disabled' );
-
+					
 					// --------------- Prepare ajax setting
 					formdata     = (window.FormData) ? new FormData( $this[ 0 ] ) : null;
 					data         = (formdata !== null) ? formdata : $this.serialize();
@@ -94,7 +98,7 @@
 					} );
 					
 					$this.trigger( 'formjs:submit', [ ajaxSettings, ajaxPending ] );
-
+					
 					// --------------- Send ajax request
 					$.ajax( ajaxSettings )
 						.done( function ( feedback ) {
@@ -102,29 +106,29 @@
 								// --------------- If no feedback found, write unexpected alert
 								if ( feedback.length === 0 )
 									throw 'No data found on response';
-
+								
 								var feedbackData = $.parseJSON( feedback );
 								var notif        = '';
 								
 								$this.trigger( 'formjs:ajax-success', [ feedback ] );
-
+								
 								// --------------- Check feedback structure
 								$this.checkFeedbackStructure( feedbackData );
-
+								
 								// --------------- If url field is in feedback,  prepare to redirect to it
 								if ( feedbackData.type === settings.keys.success && feedbackData.hasOwnProperty( 'url' ) ) {
 									notif = ' - ' + settings.redirection.message;
-
+									
 									setTimeout( function () {
 										window.location.replace( feedbackData.url );
 									}, settings.redirection.delay );
 								}
-
+								
 								// --------------- Make alert object with feedback
 								currentAlert.type    = feedbackData.type;
 								currentAlert.title   = feedbackData.data.title;
 								currentAlert.message = feedbackData.data.message + notif;
-
+								
 							} catch ( error ) {
 								$this.logError( 'AjaxSuccessCallback', error, feedback );
 							}
@@ -136,13 +140,23 @@
 							// --------------- Call after all ajax request
 							$this.writeAlert();
 						} );
-
+					
 				} catch ( error ) {
 					// --------------- Call if an error thrown before sending ajax request
 					$this.logError( 'PreSubmit', error );
 					$this.writeAlert();
 				}
-			} );
+			};
+			
+			/**
+			 * Process to sending data from the current form object
+			 */
+			$this.submit( $this.sendData );
+			
+			/**
+			 * Process to sending data from on other way from the formJS plugin
+			 */
+			$this.on( 'formjs:send-form', $this.sendData );
 
 			/**
 			 * Check the structure of feedback response
@@ -276,9 +290,9 @@
 			};
 
 			$this.init();
+			
+			return $this;
 		} );
-
-		return obj;
 	};
 
 })( jQuery );
