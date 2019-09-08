@@ -69,16 +69,50 @@ jQuery plugin to send a html form over ajax request with feedback system
 
 The response MUST be in JSON and match with this structure
 
-````json
+The distinction of response type it's on the field `data` or `view`:
+
+* If you return a response with the `data` field, the response was processed as a feedback.
+* If you return a response with the `view` field, the response was processed as a view
+* If you return a response with the `data` and `view`, the response was process as a feedback
+
+<table>
+    <tr>
+        <th>Type of response</th>
+        <th>Example</th>
+        <th>Infos</th>
+    </tr>
+    <tr>
+        <td>Feedback</td>
+        <td>
+<pre lang="json">
 {
-	"type": 	"success",
-	"url": 		"yourUrl (optionally entry)",
-	"data" : 	{
-		"title": 	"yourTitle",
-		"message": 	"yourMessage"
-	}
+    "type": 	"success",
+    "url": 		"yourUrl (optionally entry)",
+    "data" : 	{
+       "title": 	"yourTitle",
+       "message": 	"yourMessage"
+    }
 }
-````
+</pre>
+        </td>
+        <td></td>
+    </tr>
+    <tr>
+        <td>View</td>
+        <td>
+<pre lang="json">
+{
+   "type": 	"success",
+   "url": 	"yourUrl (optionally entry)",
+   "view" : "<span>A HTML response</span>"
+}
+</pre>
+        </td>
+        <td>
+        </td>
+    </tr>
+</table>
+
 
 #### Themes
 

@@ -50,44 +50,45 @@
 		}, options );
 
 		return obj.each( function () {
-			var $this        = $( this );
-			var action       = $this.attr( "action" );
-			var method       = $this.attr( "method" );
-			var btnSubmit    = $this.find( settings.form.btnSubmit );
-			var currentAlert = $.extend( settings.alerts.unexpected, { type: 'error' } );
-			var ajaxPending  = false;
-			var ajaxSettings;
-			var formdata;
-			var data;
-			
+			var $this = $( this );
+			var action,
+				method,
+				btnSubmit,
+				currentAlert,
+				currentResponseType,
+				ajaxPending,
+				ajaxSettings,
+				formdata,
+				data;
+
 			/**
 			 * Sending data method
 			 * @param e
 			 */
 			$this.sendData = function ( e ) {
 				e.preventDefault();
-				
+
 				// --------------- Check if an ajax request is in precessing
 				if ( ajaxPending === false )
 					ajaxPending = true;
 				else return;
-				
+
 				try {
 					// --------------- Check if a submit button is found
 					if ( btnSubmit.length === 0 )
 						throw 'Unable to find submit button';
-					
+
 					// --------------- Check if form method is found
 					if ( method == "" || method === null )
 						throw 'Undefined method of form';
-					
+
 					// --------------- Add loader and disabled submit button
 					btnSubmit
 						.append( $( settings.icons.loading ).addClass( 'formJS-loading' ) )
 						.attr( 'disabled' );
-					
+
 					btnSubmit.addClass( 'disabled' );
-					
+
 					// --------------- Prepare ajax setting
 					formdata     = (window.FormData) ? new FormData( $this[ 0 ] ) : null;
 					data         = (formdata !== null) ? formdata : $this.serialize();
@@ -97,9 +98,9 @@
 						data:        data,
 						processData: false
 					} );
-					
+
 					$this.trigger( 'formjs:submit', [ ajaxSettings, ajaxPending ] );
-					
+
 					// --------------- Send ajax request
 					$.ajax( ajaxSettings )
 						.done( function ( feedback ) {
@@ -107,29 +108,36 @@
 								// --------------- If no feedback found, write unexpected alert
 								if ( feedback.length === 0 )
 									throw 'No data found on response';
-								
+
 								var feedbackData = $.parseJSON( feedback );
 								var notif        = '';
-								
+
 								$this.trigger( 'formjs:ajax-success', [ feedback ] );
-								
+
 								// --------------- Check feedback structure
 								$this.checkFeedbackStructure( feedbackData );
-								
+
 								// --------------- If url field is in feedback,  prepare to redirect to it
 								if ( feedbackData.type === settings.keys.success && feedbackData.hasOwnProperty( 'url' ) ) {
 									notif = ' - ' + settings.redirection.message;
-									
+
 									setTimeout( function () {
 										window.location.replace( feedbackData.url );
 									}, settings.redirection.delay );
 								}
-								
-								// --------------- Make alert object with feedback
-								currentAlert.type    = feedbackData.type;
-								currentAlert.title   = feedbackData.data.title;
-								currentAlert.message = feedbackData.data.message + notif;
-								
+
+								if ( $this.responseIsAFeedback() ) {
+									// --------------- Make alert object with feedback
+									currentAlert.type    = feedbackData.type;
+									currentAlert.title   = feedbackData.data.title;
+									currentAlert.message = feedbackData.data.message + notif;
+
+								} else if ( $this.responseIsAView() ) {
+									// --------------- ... Or just replace the current form by the response view
+
+									$this.updateFormView( feedbackData.view );
+								}
+
 							} catch ( error ) {
 								$this.logError( 'AjaxSuccessCallback', error, feedback );
 							}
@@ -141,23 +149,13 @@
 							// --------------- Call after all ajax request
 							$this.writeAlert();
 						} );
-					
+
 				} catch ( error ) {
 					// --------------- Call if an error thrown before sending ajax request
 					$this.logError( 'PreSubmit', error );
 					$this.writeAlert();
 				}
 			};
-			
-			/**
-			 * Process to sending data from the current form object
-			 */
-			$this.submit( $this.sendData );
-			
-			/**
-			 * Process to sending data from on other way from the formJS plugin
-			 */
-			$this.on( 'formjs:send-form', $this.sendData );
 
 			/**
 			 * Check the structure of feedback response
@@ -178,19 +176,26 @@
 				if ( !inputData.hasOwnProperty( 'type' ) )
 					throw 'Invalid feedback structure: "type" missing';
 
-				if ( !inputData.hasOwnProperty( 'data' ) )
-					throw 'Invalid feedback structure: "data" missing';
+				if ( !inputData.hasOwnProperty( 'data' ) && !inputData.hasOwnProperty( 'view' ) )
+					throw 'Invalid feedback structure: "data" or "view" missing';
 
-				if ( !inputData.data.hasOwnProperty( 'title' ) )
-					throw 'Invalid feedback structure: "data.title" missing';
+				if ( inputData.hasOwnProperty( 'data' ) ) {
+					currentResponseType = 'responseFeedback';
 
-				if ( !inputData.data.hasOwnProperty( 'message' ) )
-					throw 'Invalid feedback structure: "data.message" missing';
+					if ( !inputData.data.hasOwnProperty( 'title' ) )
+						throw 'Invalid feedback structure: "data.title" missing';
 
-				if ( Object.keys( settings.keys ).indexOf( inputData.type ) === -1 )
-					throw 'Invalid feedback structure: "type" wrong. Accepted values: ' + Object.keys( settings.keys ).toString();
+					if ( !inputData.data.hasOwnProperty( 'message' ) )
+						throw 'Invalid feedback structure: "data.message" missing';
+
+					if ( Object.keys( settings.keys ).indexOf( inputData.type ) === -1 )
+						throw 'Invalid feedback structure: "type" wrong. Accepted values: ' + Object.keys( settings.keys ).toString();
+				}
+
+				if ( inputData.hasOwnProperty( 'view' ) )
+					currentResponseType = 'responseView';
 			};
-			
+
 			/**
 			 * Log and trigger error event when error are occurred during the submit processing
 			 * @param place Where the error are occurred
@@ -210,8 +215,11 @@
 			 * Create DOM alert
 			 */
 			$this.writeAlert = function () {
+				if ( !$this.responseIsAFeedback() )
+					return;
+
 				$this.trigger( 'formjs:write-alert', [ currentAlert ] );
-				
+
 				if ( settings.form.enableWriteAlert === true ) {
 					// --------------- Create alert DOM element
 					var alert = $( '<div class="alert formjs-' + settings.keys[ currentAlert.type ] + '" role="alert" />' )
@@ -224,7 +232,7 @@
 							</div>' )
 						.hide()
 						.fadeIn( 300 );
-					
+
 					// --------------- Add alert DOM element to the container
 					$( settings.form.alertContainer )
 						.empty()
@@ -265,9 +273,41 @@
 			};
 
 			/**
+			 * Update the HTML DOM with the content returned by the response. Only work with view response type
+			 * @param viewData HTML of response
+			 */
+			$this.updateFormView = function ( viewData ) {
+				if ( !$this.responseIsAView() )
+					return;
+
+				$this.html( viewData );
+				$this.init();
+			};
+
+			/**
+			 * Return true if the response of sending request is a feedback
+			 * @returns {boolean}
+			 */
+			$this.responseIsAFeedback = function () {
+				return currentResponseType === 'responseFeedback';
+			};
+
+			/**
+			 * Return true if the response of sending request is a view
+			 * @returns {boolean}
+			 */
+			$this.responseIsAView = function () {
+				return currentResponseType === 'responseView';
+			};
+
+			// ---------------------------- INIT
+
+			/**
 			 * Create the container if it not found
 			 */
 			$this.init = function () {
+				$this.initVariables();
+
 				var container = $this.find( settings.form.alertContainer );
 
 				if ( container.length === 0 ) {
@@ -291,8 +331,37 @@
 				}
 			};
 
+			/**
+			 * Init variables with current formJS object
+			 */
+			$this.initVariables = function () {
+				action              = $this.attr( "action" );
+				method              = $this.attr( "method" );
+				btnSubmit           = $this.find( settings.form.btnSubmit );
+				currentAlert        = $.extend( settings.alerts.unexpected, { type: 'error' } );
+				ajaxPending         = false;
+				currentResponseType = undefined;
+
+				$this.initEvent();
+			};
+
+			/**
+			 * Init event with current formJS object
+			 */
+			$this.initEvent = function () {
+				/**
+				 * Process to sending data from the current form object
+				 */
+				$this.submit( $this.sendData );
+
+				/**
+				 * Process to sending data from on other way from the formJS plugin
+				 */
+				$this.on( 'formjs:send-form', $this.sendData );
+			};
+
 			$this.init();
-			
+
 			return $this;
 		} );
 	};

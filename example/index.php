@@ -1,10 +1,10 @@
 <?php
     /**
-     * Copyright (c) 2018.  JAGFx
-     *
-     * @author : SMITH Emmanuel
-     * @version: 2.0.0
-     */
+ * Copyright (c) 2019.  JAGFx
+ * @author: SMITH Emmanuel
+ * @version: 2.1.0
+ *
+ */
     
     if ( isset( $_POST[ 'typeFeedback' ] ) ) {
         // Post traitment
@@ -62,6 +62,15 @@
                     ]
                 );
                 break;
+            
+	        case 'other':
+		        echo json_encode(
+			        [
+				        'type' => 'success',
+				        'view' => file_get_contents( './another-view.html' )
+			        ]
+		        );
+	        	break;
         }
         
     } else { ?>
@@ -180,19 +189,41 @@
 											<label for="typeFeedback">Type of feedback</label>
 											<div class="custom-control custom-radio">
 												<input type="radio" class="custom-control-input" name="typeFeedback" id="Success" value="success" checked>
-												<label class="custom-control-label" for="Success">Success</label>
+												<label class="custom-control-label" for="Success">
+													<span class="badge badge-info">Feedback</span>
+													Success
+												</label>
 											</div>
 											<div class="custom-control custom-radio">
 												<input type="radio" class="custom-control-input" name="typeFeedback" id="Info" value="info">
-												<label class="custom-control-label" for="Info">Info</label>
+												<label class="custom-control-label" for="Info">
+													<span class="badge badge-info">Feedback</span>
+													Info
+												</label>
 											</div>
 											<div class="custom-control custom-radio">
 												<input type="radio" class="custom-control-input" name="typeFeedback" id="Warning" value="warning">
-												<label class="custom-control-label" for="Warning">Warning</label>
+												<label class="custom-control-label" for="Warning">
+													<span class="badge badge-info">Feedback</span>
+													Warning
+												</label>
 											</div>
 											<div class="custom-control custom-radio">
 												<input type="radio" class="custom-control-input" name="typeFeedback" id="Error" value="error">
-												<label class="custom-control-label" for="Error">Error</label>
+												<label class="custom-control-label" for="Error">
+													<span class="badge badge-info">Feedback</span>
+													Error
+												</label>
+											</div>
+											
+											<hr >
+											
+											<div class="custom-control custom-radio">
+												<input type="radio" class="custom-control-input" name="typeFeedback" id="OtherView" value="other">
+												<label class="custom-control-label" for="OtherView">
+													<span class="badge badge-warning">View</span>
+													View response
+												</label>
 											</div>
 										</div>
 										
@@ -205,9 +236,9 @@
 					<div class="col-12">
 						<div class="py-3 text-center author">
 							<h2>SMITH Emmanuel</h2>
-							<a class="btn btn-sm p-0 pr-2 btn-web" href="https://www.jagfx.fr" target="_blank" title="Personal website">
+							<a class="btn btn-sm p-0 pr-2 btn-web" href="https://emmanuel-smith.me" target="_blank" title="Personal website">
 								<i class="fas fa-globe p-2 mr-1"></i>
-								www.jagfx.fr
+								emmanuel-smith.me
 							</a>
 							<a class="btn btn-sm p-0 pr-2 btn-npm" href="https://www.npmjs.com/package/jagfx-formjs" target="_blank" title="NPM repository page">
 								<i class="fab fa-npm p-2 mr-1"></i>
