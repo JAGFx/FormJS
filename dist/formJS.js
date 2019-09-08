@@ -199,9 +199,10 @@
 			 */
 			$this.logError = function ( place, message, data ) {
 				var mess = message.message || message;
-				
+
+				currentAlert.type = settings.keys.error;
 				console.error( '[FormJS][' + place + '] ' + mess );
-				
+
 				$this.trigger( 'formjs:error', [ place, mess, data ] );
 			};
 
