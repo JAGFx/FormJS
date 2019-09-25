@@ -1,6 +1,6 @@
 {
  "name": "jagfx-formjs",
- "version": "2.1.0",
+ "version": "2.2.0",
  "description": "jQuery plugin to give feedback to user with ajax request",
  "scripts": {
   "scss:clean": "gulp scss:clean",
