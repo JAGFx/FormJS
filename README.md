@@ -19,7 +19,7 @@
 
 <!-- DESCRIPTION/ -->
 
-jQuery plugin to send a html form over ajax request with feedback system
+jQuery plugin submit a form without reloading the page. It send a customizable feedback after sending
 
 <!-- /DESCRIPTION -->
 
