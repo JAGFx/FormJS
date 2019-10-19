@@ -84,9 +84,9 @@
 				<title>jQuery feedback plugin - Example</title>
 				
 				<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.min.css">
-				<link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free-webfonts/css/fa-solid.css">
-				<link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free-webfonts/css/fa-brands.css">
-				<link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free-webfonts/css/fontawesome.css">
+				<link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/solid.css">
+				<link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/brands.css">
+				<link rel="stylesheet" href="../node_modules/@fortawesome/fontawesome-free/css/fontawesome.css">
 				
 				<!-- To import -->
 				<link rel="stylesheet" href="../dist/css/theme-flat/formJS-flat.css" id="styleAlert">
