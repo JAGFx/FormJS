@@ -50,7 +50,7 @@
 		}, options );
 
 		return obj.each( function () {
-			var $this = $( this );
+			var $this      = $( this );
 			var action,
 				method,
 				btnSubmit,
@@ -59,7 +59,8 @@
 				ajaxPending,
 				ajaxSettings,
 				formdata,
-				data;
+				data,
+				writeError;
 
 			/**
 			 * Sending data method
@@ -90,6 +91,7 @@
 					btnSubmit.addClass( 'disabled' );
 
 					// --------------- Prepare ajax setting
+					writeError   = false;
 					formdata     = (window.FormData) ? new FormData( $this[ 0 ] ) : null;
 					data         = (formdata !== null) ? formdata : $this.serialize();
 					ajaxSettings = $.extend( settings.form.ajaxSettings, {
@@ -155,7 +157,6 @@
 				} catch ( error ) {
 					// --------------- Call if an error thrown before sending ajax request
 					$this.logError( 'PreSubmit', error );
-					$this.writeAlert();
 				}
 			};
 
@@ -211,13 +212,14 @@
 				console.error( '[FormJS][' + place + '] ' + mess );
 
 				$this.trigger( 'formjs:error', [ place, mess, data ] );
+				writeError = true;
 			};
 
 			/**
 			 * Create DOM alert
 			 */
 			$this.writeAlert = function () {
-				if ( !$this.responseIsAFeedback() )
+				if ( !$this.responseIsAFeedback() && !writeError )
 					return;
 
 				$this.trigger( 'formjs:write-alert', [ currentAlert ] );
