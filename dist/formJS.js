@@ -109,7 +109,9 @@
 								if ( feedback.length === 0 )
 									throw 'No data found on response';
 
-								var feedbackData = $.parseJSON( feedback );
+								var feedbackData = (feedback instanceof Object)
+									? feedback
+									: $.parseJSON( feedback );
 								var notif        = '';
 
 								$this.trigger( 'formjs:ajax-success', [ feedback ] );
