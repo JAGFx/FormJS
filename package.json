@@ -57,9 +57,9 @@
  },
  "bundlesize": [
   {
-   "path": "./dist/formJS.js",
+   "path": "./dist/formJS.js"
   },{
-   "path": "./dist/formJS.min.js",
+   "path": "./dist/formJS.min.js"
   }
  ],
  "maintainers": [
