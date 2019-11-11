@@ -335,6 +335,7 @@ You must include `node_module` folder into you sass converter to build a new sty
 
 If necessary, install `bourbon`
 ````bash
+$ npm i --only=dev
 $ npm i --no-save bourbon
 ```` 
 

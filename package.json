@@ -55,6 +55,13 @@
   "http-server": "^0.11.1",
   "node-sass": "^4.12.0"
  },
+ "bundlesize": [
+  {
+   "path": "./dist/formJS.js",
+  },{
+   "path": "./dist/formJS.min.js",
+  }
+ ],
  "maintainers": [
   "SMITH Emmanuel <contact@jagfx.fr> (http://emmanuel-smith.me)"
  ],
