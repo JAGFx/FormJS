@@ -331,6 +331,13 @@ Create a folder named with theme name and add to file:
 
 At the end of customisation, run  `npm run scss:dist` to generate your style css file and minified too.
 
+You must include `node_module` folder into you sass converter to build a new stylesheet.
+
+If necessary, install `bourbon`
+````bash
+$ npm i --no-save bourbon
+```` 
+
 ### NPM commands
 
 Remove old css files

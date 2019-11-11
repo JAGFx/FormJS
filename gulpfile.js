@@ -24,7 +24,9 @@ gulp.task( 'scss:clean', function () {
 
 gulp.task( 'scss:build', function () {
 	return gulp.src( scssPath + '*.scss' )
-		.pipe( sass() )
+		.pipe( sass( {
+			includePaths: [ 'node_modules' ]
+		} ) )
 		.pipe( gulp.dest( distCSS ) );
 } );
 
