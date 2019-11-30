@@ -1,6 +1,6 @@
 {
  "name": "jagfx-formjs",
- "version": "2.3.0",
+ "version": "2.3.1",
  "description": "jQuery plugin to give feedback to user with ajax request",
  "scripts": {
   "scss:clean": "gulp scss:clean",
@@ -43,7 +43,7 @@
  },
  "devDependencies": {
   "@fortawesome/fontawesome-free": "^5.11.2",
-  "bootstrap": "^4.3.1",
+  "bootstrap": "^4.4.1",
   "bourbon": "^5.1.0",
   "gulp": "^4.0.2",
   "gulp-clean": "^0.4.0",
@@ -53,12 +53,13 @@
   "gulp-rename": "^1.4.0",
   "gulp-sass": "^4.0.2",
   "http-server": "^0.11.1",
-  "node-sass": "^4.12.0"
+  "node-sass": "^4.13.0"
  },
  "bundlesize": [
   {
    "path": "./dist/formJS.js"
-  },{
+  },
+  {
    "path": "./dist/formJS.min.js"
   }
  ],
